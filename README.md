@@ -1,6 +1,8 @@
 chronam
 =======
 
+Karin's change test
+
 chronam is the [Django](http://djangoproject.com) application that the 
 Library of Congress uses to make its 
 [Chronicling America](http://chroniclingamerica.loc.gov) website.
