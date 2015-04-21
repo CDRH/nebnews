@@ -1,0 +1,128 @@
+/* @override http://spacely.unl.edu/cocoon/teitest/assets/css/main.css */
+
+/* @override http://spacely.unl.edu/cocoon/teitest/assets/css/main.css */
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+   
+ .navbar {
+	border: 1px solid #e3e2cf;
+	border-right: none;
+	border-left: none;
+	
+	font-family: "Roboto Condensed";
+	background-color: white;
+	/*-webkit-box-shadow: 0px 0px 5px 0px rgba(0,11,170,1);
+-moz-box-shadow: 0px 0px 5px 0px rgba(0,11,170,1);*/
+box-shadow: 0px 0px 4px 0px #aaa;
+
+font-size: 1.4em;
+
+	
+}  
+
+.navbar a {
+	text-decoration: none;
+}
+
+.navbar .container {
+	
+}
+
+.navbar-right {
+	font-size: .7em;
+	font-family: "Times New Roman";
+}
+
+.title {
+	font-size: 6em;
+	text-align: center;
+	line-height: .95em;
+	color: #3b0a00;
+	margin-bottom: .3em;
+}
+
+.nebraska {
+	/*display: block;*/
+	font-size: 1em;
+	/*margin-left: .5em;*/
+	font-variant: normal;
+	border-style: none;
+	border-bottom: 5px double #8b0f00;
+	letter-spacing: .05em;
+	color: #3b0a00;
+}
+
+
+
+.newspapers {
+	display: block;
+	font-family: "Times New Roman";
+	font-size: 1.1em;
+	font-weight: 700;
+	letter-spacing: .02em;
+	color: #000;
+}
+
+body {margin-bottom: 200px;}
+					
+
+
+
+
+
+
+/* LOC Styles */
+
+@media (max-width: 979px) {
+	body {
+	    padding-top: 0px;
+	}
+	.navbar-fixed-top {
+	    margin-bottom: 0px;
+	}
+    }
+    .breadcrumb {
+        margin: 0 0 5px;
+    }
+    #myCarousel {
+        margin-top: 10px;
+    }
+
+    ul.newspaper_pages li.span4 {
+	height: 450px;
+    }
+    @media (min-width: 1200px) {
+	ul.newspaper_pages li.span4 {
+	    height: 575px;
+	}
+    }
+    @media (max-width: 979px) and (min-width: 768px) {
+	ul.newspaper_pages li.span4 {
+	    height: 350px;
+	}
+    }
+    @media (max-width: 767px) {
+	ul.newspaper_pages li.span4 {
+	    height: auto;
+	}
+    }
+
+    .highlight_words div {
+	margin-top: -3px;
+	padding-top: 3px;
+	margin-bottom: 3px;
+	padding-bottom: 3px;
+	margin-left: -1px;
+	padding-left: 1px;
+	margin-right: 1px;
+	padding-right: 1px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: black;
+	background:transparent; /* fallback for browsers not supporting rgba */
+	background: rgba(255, 0, 0, 0.4);
+    }
+
+
