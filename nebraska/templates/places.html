@@ -1,0 +1,182 @@
+{% extends 'site_base.html' %}
+
+{% load static from staticfiles %}
+
+{# comment out block tabs and "pages available" #}
+{% block sharetool_container_left %}{% endblock %}
+{% block box-tabs %}{% endblock %}
+
+{% block subcontent %}
+
+  <h1>Browse by City</h1>
+  <!-- provide the map with a div to live inside -->
+  <div id="map" style="width: 60em; height: 33em"></div>
+
+{% endblock %}
+
+{% block javascript %}
+  <!-- INCLUDES -->
+    <!-- include leaflet css, js local files -->
+    <!-- <script src="public/leaflet-0.7.3/leaflet.js"></script>
+    <link rel="stylesheet" href="public/leaflet-0.7.3/leaflet.css"/> -->
+    <script src="{% static 'js/leaflet-0.7.3/leaflet.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'js/leaflet-0.7.3/leaflet.css' %}"/>
+
+    <!-- include a pretty little stamenizer -->
+    <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+
+    <!-- jquery scripts and css -->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" type="text/css">
+    <!-- Include this library for mobile touch support (not tested) -->
+    <script src="{% static 'js/jqueryUiTouchPunch-0.2.2/jquery.ui.touch-punch.min.js' %}"></script>
+
+    <!-- The map -->
+    <script type="text/javascript">
+      // The cities (TODO include rather than putting it here)
+      var cities = [
+        {
+          "name": "Alliance",
+          "latlong": [42.10, -102.87],
+          "papers": {
+            "The Alliance Herald": "2010270501"
+          }
+        },
+        {
+          "name": "Brownville",
+          "latlong": [40.40, -95.66],
+          "papers": {
+            "Nebraska Advertiser": "sn84020109",
+          }
+        },
+        {
+          "name": "Columbus",
+          "latlong": [41.43, -97.35],
+          "papers": {
+            "The Columbus Journal": "sn95073194",
+          }
+        },
+        {
+          "name": "Dakota City",
+          "latlong": [42.42, -96.42],
+          "papers": {
+            "Dakota County Herald": "2010270500"
+          }
+        },
+        {
+          "name": "Lincoln",
+          "latlong": [40.81, -96.68],
+          "papers": {
+            "Capital City Courier": "2010270510",
+            "The Commoner": "46032385",
+            "The Courier": "sn99066033",
+            "The Daily Nebraskan": "sn96080312",
+            "Saturday Morning Courier": "2010270512",
+            "Sunday Morning Courier": "2010270511"
+          }
+        },
+        {
+          "name": "Nemaha",
+          "latlong": [40.34, -95.68],
+          "papers": {
+            "The Nebraska Advertiser": "2010270508"
+          }
+        },
+        {
+          "name": "North Platte",
+          "latlong": [41.14, -100.77],
+          "papers": {
+            "Lincoln County Tribune": "2010270502",
+            "The North Platte Semi-Weekly Tribune": "2010270504",
+            "The North Platte Tribune": "2010270503"
+          }
+        },
+        {
+          "name": "Omaha",
+          "latlong": [41.25, -96.0],
+          "papers": {
+            "Omaha Daily Bee": "sn99021999"
+          }
+        },
+        {
+          "name": "Red Cloud",
+          "latlong": [40.09, -98.52],
+          "papers": {
+            "The Red Cloud Chief": "sn84022835"
+          }
+        }
+      ];
+
+      // The actual map code
+
+
+      var map = L.map('map').setView(new L.LatLng(41.5, -99.316), 7);
+
+      // make base layer
+      var stamenLayer = new L.StamenTileLayer('toner');
+      map.addLayer(stamenLayer);
+
+      // the historical overlay
+      var overlay = new L.TileLayer.WMS("http://rosie.unl.edu:8080/geoserver/gwc/service/wms", {
+                layers: 'buffalo_bill:Nebraska_wma',
+                format: 'image/png',
+                transparent: true
+      });
+      overlay.addTo(map);
+
+      var makeLinks = function(city, papers) {
+        if (papers) {
+          var res = "<h4>"+city+"</h4>";
+          for (var paper in papers) {
+            res += singleLink(paper, papers[paper])
+          }
+          return res;
+        } else {
+          return "No papers found for this city";
+        }
+      };
+
+      var singleLink = function(name, id) {
+        return "<li class='map_paper_link'>"
+               +"<a href='http://cors1303.unl.edu/lccn/"
+               +id+"/'>"+name+"</a></li>";
+      };
+
+      var circleMarkers = {
+        radius: 8,
+        fillColor: "#8C0100",
+        color: "#000000",
+        weight: 1,
+        opacity: 1,
+        fillOpacity: .8
+      };
+
+      cities.forEach(function(city) {
+        var opts = {
+          "title": city["name"], 
+          "riseOnHover": true
+        };
+        // var marker = L.marker(city["latlong"], opts);
+        var marker = L.circleMarker(city["latlong"], circleMarkers);
+        marker.addTo(map);
+        marker.bindPopup(makeLinks(city["name"], city["papers"]));
+        // add a mouseover that waits for you to click away before closing
+        marker.on('mouseover', function(e) {
+          this.openPopup();
+        });
+        marker.on('click', function(e) {
+          this.closePopup();
+        });
+      });
+
+      // var markers = [];
+      // create a layer group so that all the markers can be controlled together
+      // var newspapers = L.layerGroup(markers).addTo(map);
+
+      
+    </script>
+
+
+{% endblock javascript %}
+

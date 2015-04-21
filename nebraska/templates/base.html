@@ -16,7 +16,7 @@
           href="http://www.loc.gov/rss/ndnp/ndnp.xml" />
     <meta http-equiv="Content-Language" content="en-us" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link type="text/css" rel="stylesheet" href="{% static 'base.css' %}" />
+    <!-- <link type="text/css" rel="stylesheet" href="{% static 'base.css' %}" /> -->
     <link type="text/css" rel="stylesheet"
           href="{% static 'jquery-ui.css' %}" />
     <link type="text/css" rel="styelsheet" href="{% static 'ui_carousel.css' %}" />
@@ -32,7 +32,8 @@
 
     {% block main_body %}
     {% block box-tabs %}
-    <div id="tabs-container" {% if collapse_search_tab %}class="collapsed"{% endif %}></div>
+    <!-- Uncomment to see a search toolbar at the top of most pages -->
+    <!-- <div id="tabs-container" {% if collapse_search_tab %}class="collapsed"{% endif %}></div> -->
     {% endblock box-tabs %}
     <div class="sharetool_container">
         {% block sharetool_container_left %}

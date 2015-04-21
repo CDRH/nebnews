@@ -6,6 +6,8 @@ from django.utils import cache
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from chronam.core.views import home, image, search
+from chronam.nebraska import views
+from chronam.nebraska import urls
 
 handler404 = 'django.views.defaults.page_not_found'
 handler500 = 'django.views.defaults.server_error'
@@ -19,6 +21,7 @@ def cache_page(function, ttl):
         cache.patch_cache_control(response, public=True)
         return response
     return decorated_function
+
 
 urlpatterns = patterns(
     'chronam.core.views',
@@ -70,6 +73,10 @@ urlpatterns = patterns(
         cache_page(image.coordinates, settings.DEFAULT_TTL_SECONDS),
         name="chronam_page_coordinates_words"),
         
+)
+
+urlpatterns += patterns('chronam.nebraska.views', 
+  url(r'^places$', 'places', name="chronam_places")
 )
 
 urlpatterns += patterns(

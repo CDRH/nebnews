@@ -9,7 +9,7 @@
 <script type="text/javascript" src="{% static 'js/jquery.jcarousel.min.js' %}"></script>
 
 <script type="text/javascript"> 
-$(document).ready(setupCarousel);
+// $(document).ready(setupCarousel);
 
 function setupCarousel() {
     // if the current page location has a date in it use that otherwise 
@@ -61,9 +61,10 @@ function shuffle(myArray) {
 
 {% block subcontent %}
   <div class="carousel-body"> 
-    <div class="carousel-menu"> 
+    <!-- uncomment to view carousel -->
+    <!-- <div class="carousel-menu"> 
         <a id="hundredYears" href='{% url 'chronam_search_pages_results' %}?dateFilterType=range&date1={{date|date:"m/d/Y" }}&date2={{date|date:"m/d/Y"}}/'><strong>100 Years Ago Today</strong>: </a>
-    </div> 
+    </div>  -->
     <ul id="mycarousel" class="jcarousel-skin-tango"> 
     </ul> 
   </div><!-- end carousel-body --> 
