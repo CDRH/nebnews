@@ -23,7 +23,16 @@ def cache_page(function, ttl):
     return decorated_function
 
 
-urlpatterns = patterns(
+# TODO these are custom urls for Nebraska and should
+# be moved at some point to their own file
+# Putting them at the top overrides similar ones below
+urlpatterns = patterns('chronam.nebraska.views', 
+  url(r'^places$', 'places', name="chronam_places"),
+  url(r'^newspapers/$', 'newspapers', name="chronam_newspapers"),
+  url(r'^newspapers$', 'newspapers', name="chronam_newspapers"),
+)
+
+urlpatterns += patterns(
     'chronam.core.views',
 
     url(r'^$',
@@ -75,9 +84,7 @@ urlpatterns = patterns(
         
 )
 
-urlpatterns += patterns('chronam.nebraska.views', 
-  url(r'^places$', 'places', name="chronam_places")
-)
+
 
 urlpatterns += patterns(
     'chronam.core.views',

@@ -217,6 +217,11 @@ class Title(models.Model):
     uri = models.URLField(null=True, max_length=500, help_text="856$u")
     sitemap_indexed = models.DateTimeField(auto_now_add=False, null=True)
 
+    # Crude edit to estimate the city / town from location information
+    @property
+    def city(self):
+        return self.place_of_publication.split(',')[0]
+
     @property
     @permalink
     def url(self):
