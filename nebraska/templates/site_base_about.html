@@ -1,0 +1,31 @@
+{% extends 'site_base.html' %}
+
+{% load static from staticfiles %}
+
+{% block sharetool_container_left %}{% endblock %}
+
+{% block main_content %}
+
+  {% block about_nav %}
+    <ul id="about_nav">
+      <li>
+        <a href="{% url 'chronam_about' %}">About</a>
+      </li>
+      <li>
+        <a href="{% url 'chronam_adding' %}">Adding</a>
+      </li>
+      <li>
+        <a href="{% url 'chronam_nnp' %}">The Nebraska Newspaper Project</a>
+      </li>
+      <li>
+        <a href="{% url 'chronam_ndnp' %}">The National Digital Newspaper Project</a>
+      </li>
+      <li>
+        <a href="{% url 'chronam_access' %}">Access</a>
+      </li>
+      <li>
+        <a href="{% url 'chronam_contact' %}">Contact</a>
+      </li>
+    </ul>
+  {% endblock about_nav %}
+{% endblock main_content %}

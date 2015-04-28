@@ -1,0 +1,16 @@
+{% extends 'site_base_about.html' %}
+
+{% load static from staticfiles %}
+
+{% block sharetool_container_left %}{% endblock %}
+
+{% block main_content %}
+  {{ block.super }}
+
+  <div id="content_wrapper" class="about">
+    <h2>Contact</h2>
+    
+For questions about content, please contact Katherine Walter, Project Director, at <a href="mailto:kwalter1@unl.edu">kwalter1.@unl.edu</a>.  For technical or other issues, please contact <a href="mailto:cdrh@unl.edu">cdrh@unl.edu</a>.
+
+  </div>
+{% endblock %}    

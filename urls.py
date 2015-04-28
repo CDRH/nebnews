@@ -27,9 +27,14 @@ def cache_page(function, ttl):
 # be moved at some point to their own file
 # Putting them at the top overrides similar ones below
 urlpatterns = patterns('chronam.nebraska.views', 
-  url(r'^places$', 'places', name="chronam_places"),
+  url(r'^places/$', 'places', name="chronam_places"),
   url(r'^newspapers/$', 'newspapers', name="chronam_newspapers"),
-  url(r'^newspapers$', 'newspapers', name="chronam_newspapers"),
+  url(r'^nebraska_publishing/$', 'nebraska_publishing', name="chronam_publishing"),
+  url(r'^info/about/adding/$', 'adding', name="chronam_adding"),
+  url(r'^info/about/NNP/$', 'nnp', name="chronam_nnp"),
+  url(r'^info/about/NDNP/$', 'ndnp', name="chronam_ndnp"),
+  url(r'^info/about/access/$', 'access', name="chronam_access"),
+  url(r'^info/about/contact/$', 'contact', name="chronam_contact"),
 )
 
 urlpatterns += patterns(

@@ -23,6 +23,34 @@ def places(request):
                             dictionary=locals(), 
                             context_instance=RequestContext(request))
 
+def nebraska_publishing(request):
+  return render_to_response('nebraska_publishing.html',
+                            dictionary=locals(),
+                            context_instance=RequestContext(request))
+
+def adding(request):
+  return render_to_response('adding.html',
+                            dictionary=locals(),
+                            context_instance=RequestContext(request))
+
+def nnp(request):
+  return render_to_response('nnp.html',
+                            dictionary=locals(),
+                            context_instance=RequestContext(request))
+def ndnp(request):
+  return render_to_response('ndnp.html',
+                            dictionary=locals(),
+                            context_instance=RequestContext(request))
+
+def access(request):
+  return render_to_response('access.html',
+                            dictionary=locals(),
+                            context_instance=RequestContext(request))
+
+def contact(request):
+  return render_to_response('contact.html',
+                            dictionary=locals(),
+                            context_instance=RequestContext(request))
 
 @cache_page(settings.DEFAULT_TTL_SECONDS)
 def newspapers(request, state=None, format='html'):

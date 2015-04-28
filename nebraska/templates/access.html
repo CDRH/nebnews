@@ -1,0 +1,48 @@
+{% extends 'site_base_about.html' %}
+
+{% load static from staticfiles %}
+
+{% block sharetool_container_left %}{% endblock %}
+
+{% block main_content %}
+  {{ block.super }}
+
+  <div id="content_wrapper" class="about">
+
+  <h2>Access: Finding Nebraska Newspapers</h2>
+
+  <h3>UNL Libraries catalog</h3>
+
+  <p>Newspapers in the <a href="http://libraries.unl.edu/">catalog</a> are accessible by title, keyword, subject heading and place of publication.</p>
+
+  <p>The most straightforward search is by title. If the exact title is not known, but some words of the title are known, then a keyword search can be done. Finally, it is possible to search newspapers published in a particular state, county, or town. For example, to find newpapers published in Valentine, Neb., enter: "United States Nebraska Cherry Valentine".</p>
+
+  <p>If the location in the search results says "NE St Hist Soc", then the newspaper is held at the Nebraska State Historical Society on 15th and R Street in Lincoln. They are open Tues. - Fri. 9:00-12:00 and 1:00-4:00, and Sat. 8-5. The majority of the newspapers are on microfilm, and are available via interlibrary loan.</p>
+
+  <p>The catalog record shows a summary of holding years in the LIB HAS field, but many times there are gaps in the holdings. To find out whether the Society holds a specific date (e.g. June 2, 1942), you must check the inventory sheets, which are in the reading room at the Historical Society. They are in binders arranged alphabetically by place of publication.</p>
+
+  <p>If you have any questions or need directions, feel free to ask the reading room staff for help.</p>
+
+  <h3>Historical Society Interlibrary Loan Policy</h3>
+    
+  <p>Microfilm copies of Nebraska newspapers filmed by NSHS or easily replaceable microfilm are available through Interlibrary Loan. Materials not available for loan include newspapers not filmed by the NSHS for which the NSHS does not hold the negative.</p>
+
+  <p>For more information on availability and fees, please visit the <a href="http://www.unl.edu/nebnews/illpol.html">NSHS site</a><br>
+or contact:<br>
+Interlibrary Loans<br>
+Nebraska State Historical Society<br>
+PO Box 82554<br>
+Lincoln, Nebraska 68501<br>
+(402)471-4771</p>
+
+  <h3>Nebraska Press Association</h3>
+
+  <p>The <a href="http://www.nebpress.com">Nebraska Press Association</a> web site contains listings of all Nebraska newspapers, available alphabetically by publication name, alphabetically by county name, geographically, or by circulation.</p>
+
+  <h3>Library of Congress</h3>
+
+  <p>The Library of Congress maintains a list of <a href="http://www.loc.gov/rr/news/oltitles.html">Newspaper Archives/Indexes/Morgues</a>.</p>
+
+
+  </div>
+{% endblock %}    
