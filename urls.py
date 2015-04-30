@@ -344,9 +344,9 @@ urlpatterns += patterns(
         'institution_titles', name='chronam_institution_titles_page_number'),
 
     # awardee
-    url(r'^awardees/(?P<institution_code>\w+)/$', 'awardee', 
+    url(r'^awardees/(?P<institution_code>\w+@?)/$', 'awardee', 
         name='chronam_awardee'),
-    url(r'^awardees/(?P<institution_code>\w+).json$', 'awardee_json', name='chronam_awardee_json'),
+    url(r'^awardees/(?P<institution_code>\w+@?).json$', 'awardee_json', name='chronam_awardee_json'),
 
 
     url(r'^status', 'status', name='chronam_stats'),
@@ -378,8 +378,8 @@ urlpatterns += patterns(
     url(r'^lccn/(?P<lccn>\w+)/(?P<date>\d{4}-\d{2}-\d{2})/ed-(?P<edition>\d+)/seq-(?P<sequence>\d+)$', 'page_rdf', name="chronam_page_rdf"),
 
     # awardee
-    url(r'^awardees/(?P<institution_code>\w+).rdf$', 'awardee_rdf', name='chronam_awardee_dot_rdf'),
-    url(r'^awardees/(?P<institution_code>\w+)$', 'awardee_rdf', name='chronam_awardee_rdf'),
+    url(r'^awardees/(?P<institution_code>\w+@?).rdf$', 'awardee_rdf', name='chronam_awardee_dot_rdf'),
+    url(r'^awardees/(?P<institution_code>\w+@?)$', 'awardee_rdf', name='chronam_awardee_rdf'),
 
     # ndnp vocabulary
     url(r'^terms/.*$', 'terms', name='chronam_terms'),
