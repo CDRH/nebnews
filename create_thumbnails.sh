@@ -1,14 +1,13 @@
 #! /bin/bash
 
-## Generates a chronicling america batch's thumbnails from a jp2
-# For an explanation of how convert gets called from inside -exec
-# http://unix.stackexchange.com/questions/50692/executing-user-defined-function-in-a-find-exec-call
+## Generates jpg thumbnails from jp2s
+# requires graphicsmagick and parallel
 
 convert() {
   # configuration
   overwrite=false
   dimensions="360x512"
-  
+
   # take the extension off of the file path
   filepath=${1%.*}
   if [ -e "$filepath.jpg" -a "$overwrite" = "false" ]; then
@@ -20,18 +19,24 @@ convert() {
 }
 export -f convert
 
+begin=`date`
 if [ $# == 1 ]; then
   # check that the directory exists
   if [ -d "$1" ]; then
     dir_path=$1
     # strip the trailing slash before running find
-    # do fancy things in order to get the convert function into the subshell
-    find "${dir_path%/}" -type f -name "*.jp2" -exec bash -c 'convert "$@"' bash {} \;
+    find "${dir_path%/}" -type f -name "*.jp2" | parallel --jobs 200% convert
 
   else
     echo "Directory $1 does not exist"
+    exit 1
   fi
 else
   echo "Please specify a directory."
-  echo "Example:  ./convert_images /batches/nbu_ford/batch_nbu_ford_ver01/data/"
+  echo "Example:  ./convert_images /batches/prefix_batch/batch_name/data/"
+  exit 1
 fi
+end=`date`
+echo "Script started at $begin"
+echo "Script finished at $end"
+
