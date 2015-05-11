@@ -2,123 +2,7 @@
 {% load static from staticfiles %}
 {% load custom_filters %}
 
-{% block javascript %}
-{{ block.super }}
-<script type="text/javascript" src="{% static 'js/jquery.ba-bbq.min.js' %}"></script> 
-<script type="text/javascript">
-
-jQuery(function($){
-    $("#sort_select option[value='{{sort}}']").attr("selected", true);
-    $("#rpp_select option[value='{{rows}}']").attr("selected", true);
-    if ($.deparam.querystring().sequence == 1){ 
-        $("input#check_front").attr('checked', 'checked');
-    }
-    $("#rpp_select").change(function(){
-        window.location=$.param.querystring(location.href, {'rows': this.value});
-    });
-    $("#sort_select").change(function(){
-        window.location=$.param.querystring(location.href, {'sort': this.value});
-    });
-    $("#check_front").change(function(){
-        var checked = $("#check_front").attr("checked") ? 1 : '';
-        window.location=$.param.querystring(location.href, {'sequence': checked});
-    });
-    $("#filter_select_year").change(function(){
-        if (this.value.indexOf("-") != -1){
-            var year_range = this.value.split("-");
-            window.location=$.param.querystring(location.href, 
-                                            {"date1": year_range[0],
-                                             "date2": year_range[1]});
-        }
-        else{
-            window.location=$.param.querystring(location.href, 
-                                            {"date1": this.value,
-                                             "date2": this.value});
-        }
-    });
-    $("#filter_select_state").change(function(){
-        window.location=$.param.querystring(location.href, {'state': this.value});
-    });
-    $("#filter_select_county").change(function(){
-        window.location=$.param.querystring(location.href, {'county': this.value});
-    });
-    $("#cancel_date_filter").on("click", function(e) {
-            window.location=$.param.querystring(location.href, 
-                                            {"date1": "",
-                                             "date2": ""});
-    });
-    $("#cancel_state_filter").on("click", function(e) {
-            window.location=$.param.querystring(location.href, 
-                                            {"state": ""});
-    });
-});
-</script>
-
-<script type="text/javascript">
-
-var padding = 5;
-
-var offset = 2; /* Think the 'a' tag around the thumbnail has a border
-that shifts the thumbnail down and to the right a couple pixels... so
-we do the same with the highlights */
-
-
-function add_highlights(div) {
-    var image = div.find(".thumbnail");
-    var id = div.find("input[name='id']").attr("value");
-    var words = div.find("input[name='words']").attr("value");
-    var width = image.width();
-    var height = image.height();
-    if (width>0 && height>0) {
-        $.getJSON('{{script_name}}'+id+'coordinates/', function(all_coordinates) {
-            var vScale = height / all_coordinates["height"];
-            var hScale = width / all_coordinates["width"];
-            $.each(words.split(" "), function(index, word) {
-                    var boxes = [];
-                    var coordinates = all_coordinates["coords"][word];
-                    for (k in coordinates) {
-                        var v = coordinates[k];
-                        div.append("<img class='highlite' src='"+"{% static 'images/red_60.png' %}" +
-    "' style='TOP: " +  (v[1] * vScale - padding/2.0 + offset) + 'px;' +
-    " LEFT: " +       (v[0] * hScale - padding/2.0 + offset) + 'px;' +
-    " HEIGHT: " +     (v[3] * vScale + padding) + 'px;' +
-    " WIDTH: " +      (v[2] * hScale + padding) + "px;'/>");
-
-                    }
-                });
-            });
-    }
-}
-
-
-function initHighlights() {
-  // add highlights after images load
-  $("img.thumbnail").load(function(i) {
-    var div = $(this).parents("div.highlite");
-    add_highlights(div);
-  });
-
-  // add highlights for already loaded images
-  // TODO: prevent from potentially adding highlights twice
-  $("div.highlite").each(function(i) {
-    var div = $(this);
-    add_highlights(div);
-  });
-};
-
-if ($.browser.msie && $.browser.version < 7) {
-    window.onload = initHighlights;
-} else {
-    $(document).ready(initHighlights);
-}
-
-</script>
-
-{% endblock %}
-
-{% block page_head_container %}{% endblock %}
-
-{% block subcontent %}
+{% block content %}
 
 {% ifequal paginator.count 0 %}
 
@@ -194,46 +78,47 @@ if ($.browser.msie && $.browser.version < 7) {
             </p>
         </form>
     </div>
-    {% block search_results_box %}
-    <table class="search_results" cellspacing="0" summary="">
-        <tr>
-            {% for object in page.object_list %}
-            <td>
-            {% if object %}
-                <div class="highlite">
-                    <a href="{{ object.highlight_url }}">
-                    {% if object.jp2_filename %} 
-                    <img class="thumbnail" src="{{ object.thumb_url }}" />
-                    {% else %}
-                     No Image
-                    {% endif %}
-                    </a><br />
-		    {% with object.issue.title as title %}
-                    <a href="{{ object.highlight_url }}">{{title.display_name}} ({{title.place_of_publication}}), {{object.issue|label}}, {{object|label}}</a>
-		    {% endwith %}
-
-                    {% comment %}The following two hidden input fields are used by the add_highlights javascript{% endcomment %}
-                    <input name="id" value="{{object.url}}" type="hidden"/>
-                    <input name="words" value="{{object.words|join:' '}}" type="hidden"/>
-                </div>
-            {% endif %}
-            </td>
-            {% if forloop.counter|divisibleby:4 and not forloop.last %}
-            </tr><tr>
-            {% endif %}        
-            {% endfor %}
-        </tr>
-    </table>
-    <div class="txt_wrapper">
-    	<p class="backtotop gallery"><a href="#skip_menu">Top</a></p>
-    </div>
-
-{% endblock %}
-</div><!-- end class:search_results_body -->
-
-<div class="search_results_ctrl bot fix-float">
-    {% include 'includes/results_ctrl.html' %}
-</div><!-- end class:search_results_ctrl -->
 {% endifequal %}
+{% block search_results_box %}
+<div class="content">
+  <table class="search_results" cellspacing="0" summary="">
+    <tr>
+      {% for object in page.object_list %}
+        <td>
+          {% if object %}
+            <div class="highlite">
+              <a href="{{ object.highlight_url }}">
+                {% if object.jp2_filename %}
+                  <img class="highlight_words" 
+                       src="{{ object.thumb_url }}"
+                       data-script_name="{{script_name}}"
+                       data-id="{{object.url}}"
+                       data-words="{{object.words|join:' '}}" />
+                {% else %}
+                  No Image
+                {% endif %}
+              </a><br />
+              {% with object.issue.title as title %}
+                <a href="{{ object.highlight_url }}">{{title.display_name}} ({{title.place_of_publication}}), {{object.issue|label}}, {{object|label}}</a>
+              {% endwith %}
+              <input name="id" value="{{object.url}}" type="hidden"/>
+              <input name="words" value="{{object.words|join:' '}}" type="hidden"/>
+            </div>
+         {% endif %}
+       </td>
+       {% if forloop.counter|divisibleby:4 and not forloop.last %}
+         </tr><tr>
+       {% endif %}
+     {% endfor %}
+    </tr>
+  </table>
+</div>
 {% endblock %}
 
+{% endblock %}
+
+
+{% block javascript %}
+{{ block.super }}
+    <script src="{% static 'js/highlight.js' %}"></script>
+{% endblock %}
