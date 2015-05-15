@@ -2,9 +2,12 @@
 import csv
 import json
 
+from django import forms as django_forms
+
 from django.conf import settings
 from django.core import urlresolvers
 from django.core.urlresolvers import reverse
+from django.forms import fields
 
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -17,7 +20,9 @@ from chronam.core.utils.utils import _page_range_short, _rdf_base
 from chronam.core import models, index
 from chronam.core.rdf import titles_to_graph
 from chronam.core.utils.url import unpack_url_path
+from chronam.core.utils.utils import HTMLCalendar, create_crumbs
 
+# Static pages with no variables, etc
 def places(request):
   return render_to_response('places.html', 
                             dictionary=locals(), 
@@ -52,6 +57,12 @@ def contact(request):
                             dictionary=locals(),
                             context_instance=RequestContext(request))
 
+
+# Dynamic pages
+
+# newspapers page is not using json queries, etc.
+# but the url has been left so those queries will
+# hit the newspapers version in the core
 @cache_page(settings.DEFAULT_TTL_SECONDS)
 def newspapers(request, state=None, format='html'):
     if state and state != "all_states":
@@ -151,3 +162,31 @@ def newspapers(request, state=None, format='html'):
         return HttpResponse(json.dumps(results, indent=2), mimetype='application/json')
     else:
         return HttpResponseServerError("unsupported format: %s" % format)
+
+
+@cache_page(settings.DEFAULT_TTL_SECONDS)
+def calendar_issues(request, year=None):
+    # title = get_object_or_404(models.Title, lccn=lccn)
+    # issues = title.issues.all()
+    issues = models.Issue.objects.all().order_by('date_issued')
+    if issues.count() > 0:
+        if year is None:
+            _year = issues[0].date_issued.year
+        else:
+            _year = int(year)
+    else:
+        _year = 1900  # no issues available
+    year_view = HTMLCalendar(firstweekday=6, issues=issues, all_issues=True).formatyear(_year)
+    dates = issues.dates('date_issued', 'year')
+
+    class SelectYearForm(django_forms.Form):
+        year = fields.ChoiceField(choices=((d.year, d.year) for d in dates),
+                                  initial=_year)
+    select_year_form = SelectYearForm()
+    page_title = "Browse All Issues"
+    page_name = "calendar"
+    # crumbs = create_crumbs(title)
+    return render_to_response('calendar.html', dictionary=locals(),
+                              context_instance=RequestContext(request))
+
+

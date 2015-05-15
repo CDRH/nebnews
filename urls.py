@@ -35,6 +35,12 @@ urlpatterns = patterns('chronam.nebraska.views',
   url(r'^info/about/NDNP/$', 'ndnp', name="chronam_ndnp"),
   url(r'^info/about/access/$', 'access', name="chronam_access"),
   url(r'^info/about/contact/$', 'contact', name="chronam_contact"),
+
+  # example: /calendar/
+  url(r'^calendar/$', 'calendar_issues', name="chronam_calendar"),
+  # example: /calendar/1900
+  url(r'^calendar/(?P<year>\d{4})/$', 'calendar_issues', name="chronam_calendar"),
+
 )
 
 urlpatterns += patterns(
