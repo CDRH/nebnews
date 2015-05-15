@@ -166,8 +166,6 @@ def newspapers(request, state=None, format='html'):
 
 @cache_page(settings.DEFAULT_TTL_SECONDS)
 def calendar_issues(request, year=None):
-    # title = get_object_or_404(models.Title, lccn=lccn)
-    # issues = title.issues.all()
     issues = models.Issue.objects.all().order_by('date_issued')
     if issues.count() > 0:
         if year is None:
@@ -185,7 +183,6 @@ def calendar_issues(request, year=None):
     select_year_form = SelectYearForm()
     page_title = "Browse All Issues"
     page_name = "calendar"
-    # crumbs = create_crumbs(title)
     return render_to_response('calendar.html', dictionary=locals(),
                               context_instance=RequestContext(request))
 
