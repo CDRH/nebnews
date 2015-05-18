@@ -41,6 +41,9 @@ urlpatterns = patterns('chronam.nebraska.views',
   # example: /calendar/1900
   url(r'^calendar/(?P<year>\d{4})/$', 'calendar_issues', name="chronam_calendar"),
 
+  # adding a 404 and 500 page for testing purposes
+  url(r'^404/$', 'fourohfour', name="chronam_404"),
+  url(r'^500/$', 'fivehundred', name="chronam_500"),
 )
 
 urlpatterns += patterns(

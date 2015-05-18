@@ -57,6 +57,15 @@ def contact(request):
                             dictionary=locals(),
                             context_instance=RequestContext(request))
 
+def fourohfour(request):
+    return render_to_response('404.html',
+                              dictionary=locals(),
+                              context_instance=RequestContext(request))
+
+def fivehundred(request):
+    return render_to_response('500.html',
+                              dictionary=locals(),
+                              context_instance=RequestContext(request))
 
 # Dynamic pages
 
