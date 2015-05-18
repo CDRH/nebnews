@@ -11,15 +11,6 @@ jQuery(function($){
     $("#id_year").change(function(){
         window.location = '{% url 'chronam_calendar' %}' + this.value;        
         });
-    $("td.multiple").find("ul").css("display", "none");
-    
-    $("td.multiple").click(
-    function () {
-    $(this).find("ul").slideToggle();
-    },
-    function () {
-    $(this).find("ul").slideToggle();
-    });
 });
 </script>
 {% endblock %}
