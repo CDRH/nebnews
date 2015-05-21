@@ -50,13 +50,13 @@ Generating Thumbnails
 
 Assuming that your permissions are set correctly, you should be able to view an individual page of the newspaper and receive tiles from the server.  If the images are coming back as 404s or 500s, then make sure that your permissions allow reading, writing, and execution for jp2s.
 
-If you are using pregenerated thumbnails (if PREGEN_THUMBNAILS is True in settings.py), then you will need to run a script to create jpgs for the search results / browse views.
+If you are using pregenerated thumbnails (if `PREGEN_THUMBNAILS` is `True` in settings.py), then you will need to run a script to create jpgs for the search results / browse views.
 
     cd /opt/chronam
     ./create_thumbnails /batches/prefix_batchname/
 
 There are some settings for that script.  If you open it up, you can see that you have the choice of skipping or overwriting existing thumbnails and you can customize the size of the thumbnails.  Our default size is 360x512.
 
-This script will effectively bring the server to its knees, as it is running the image conversion across all the cores.  If you need the website to stay live while you are pregenerating thumbnails, edit the line of the script where find pipes its results to parallel and remove "--jobs 200%".  This should dramatically reduce the load on the server.
+This script will effectively bring the server to its knees, as it is running the image conversion across all the cores.  If you need the website to stay live while you are pregenerating thumbnails, edit the line of the script where find pipes its results to parallel and remove `--jobs 200%`.  This should dramatically reduce the load on the server.
 
 Even for small batches this script may take several hours to run.
