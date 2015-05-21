@@ -1,6 +1,8 @@
 # Create your views here.
 import csv
 import json
+import datetime
+import os
 
 from django import forms as django_forms
 
@@ -22,6 +24,18 @@ from chronam.core.rdf import titles_to_graph
 from chronam.core.utils.url import unpack_url_path
 from chronam.core.utils.utils import HTMLCalendar, create_crumbs
 
+
+# Home
+def home(request):
+    # The featured content is being pulled by ajax
+    return render_to_response('home.html',
+                           dictionary=locals(),
+                           context_instance=RequestContext(request))        
+
+def featured(request):
+    file = open(os.path.join(settings.DIRNAME, 'featured.json'))
+    return HttpResponse(file, mimetype='application/json')
+
 # Static pages with no variables, etc
 def places(request):
   page_title = "Newspapers by City"
@@ -35,31 +49,32 @@ def nebraska_publishing(request):
                             dictionary=locals(),
                             context_instance=RequestContext(request))
 
+#Changing all headers to about -KMD
 def adding(request):
-  page_title = "Adding Newspapers"
+  page_title = "About Nebraska Newspapers"
   return render_to_response('adding.html',
                             dictionary=locals(),
                             context_instance=RequestContext(request))
 
 def nnp(request):
-  page_title = "The Nebraska Newspaper Project"
+  page_title = "About Nebraska Newspapers"
   return render_to_response('nnp.html',
                             dictionary=locals(),
                             context_instance=RequestContext(request))
 def ndnp(request):
-  page_title = "The National Digital Newspaper Project"
+  page_title = "About Nebraska Newspapers"
   return render_to_response('ndnp.html',
                             dictionary=locals(),
                             context_instance=RequestContext(request))
 
 def access(request):
-  page_title = "Access: Finding Nebraska Newspapers"
+  page_title = "About Nebraska Newspapers"
   return render_to_response('access.html',
                             dictionary=locals(),
                             context_instance=RequestContext(request))
 
 def contact(request):
-  page_title = "Contact the Nebrasks Newspapers Project"
+  page_title = "About Nebraska Newspapers"
   return render_to_response('contact.html',
                             dictionary=locals(),
                             context_instance=RequestContext(request))

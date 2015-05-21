@@ -27,6 +27,10 @@ def cache_page(function, ttl):
 # be moved at some point to their own file
 # Putting them at the top overrides similar ones below
 urlpatterns = patterns('chronam.nebraska.views', 
+  # home and featured page
+  url(r'^$', 'home', name="chronam_home"),
+  url(r'^featured.json$', 'featured', name='chronam_featured'),
+  # static pages
   url(r'^places/$', 'places', name="chronam_places"),
   url(r'^newspapers/$', 'newspapers', name="chronam_newspapers"),
   url(r'^nebraska_publishing/$', 'nebraska_publishing', name="chronam_publishing"),
