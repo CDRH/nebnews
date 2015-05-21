@@ -1,3 +1,16 @@
-{
-  fake: "This is fake json"
-}
+[
+  {
+    full_url: "http://cors1303.unl.edu/lccn/sn99067057/1917-05-08/ed-1/seq-1/
+",
+    thumbnail_url: "http://cors1303.unl.edu/lccn/sn99067057/1917-05-08/ed-1/seq-1/thumbnail.jpg"
+    label: "",
+    title: "Ozvêna Západu",
+    date: "May 8, 1917"
+  },
+  {
+    full_url: "http://cors1303.unl.edu/lccn/sn99067057/1917-01-17/ed-1/seq-1/",
+    thumbnail_url: "http://cors1303.unl.edu/lccn/sn99067057/1917-01-17/ed-1/seq-1/thumbnail.jpg",
+    label: "",
+    title: "Ozvêna Západu",
+    date: "January 17, 1917"
+  }
