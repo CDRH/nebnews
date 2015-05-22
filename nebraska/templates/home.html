@@ -5,45 +5,23 @@
  
 {% block javascript %}
 {{ block.super }}
-<!-- jCarousel --> 
-<script type="text/javascript" src="{% static 'js/jquery.jcarousel.min.js' %}"></script>
 
 <script type="text/javascript"> 
-$(document).ready(setupCarousel);
+$(document).ready(setupFeatured);
 
-function setupCarousel() {
-
-    // lookup featured pages and add them to the carousel
-    var url = "/featured.json" + t.getFullYear() + "-" + (t.getMonth() + 1) + "-" + t.getDate() + ".json";
+function setupFeatured() {
+    // lookup featured pages and choose one randomly to display
+    var url = "featured.json";
     $.getJSON(url, function(results) {
-        if (results) {
-          // add some some descriptive text and a canned search to the carousel
-          $("#featured_content").append(results.length + "featured issues");
+        if (results && results.length > 0) {
+          var page = results[Math.floor(Math.random()*results.length)];
+          var content = $('#featured_content');
+          content.append($('<a href="' + page.full_url +'"><img class="thumbnail" src="' + page.thumbnail_url + '" width="200" height="286" alt="' + page.label + '"/></><span><a href="' + page.full_url + '"><strong>' + page.date + '</strong><br />'+ page.title + '</a></span>'));
         }
-        var tSearch = (t.getMonth() + 1) + "/" + t.getDate() + "/" + t.getFullYear();
-        $("#hundredYears").attr({"href": "/search/pages/results/?dateFilterType=range&date1=" + tSearch + "&date2=" + tSearch}); 
 
-        // add the newspaper images to the carousel
-        shuffle(results);
-        var carousel = $('#mycarousel');
-        for (var i=0; i < results.length; i++) {
-          var img = results[i];
-          carousel.append($('<li><a href="' + img.full_url + '"><img class="thumbnail" src="' + img.thumbnail_url + '" width="200" height="286" alt="" /></a><br /><span><a href="' + img.full_url + '"><strong>' + img.label + '</strong></a><br />' + img.title + '</span></li>'));
-        }
-        carousel.jcarousel();
+    }).fail(function(e) { 
+       console.log("There was an error retrieving the featured content " + JSON.stringify(e)); 
     });
-}
-
-function shuffle(myArray) {
-    var i = myArray.length;
-    if (i == 0) return false;
-    while (--i) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var tempi = myArray[i];
-        var tempj = myArray[j];
-        myArray[i] = tempj;
-        myArray[j] = tempi;
-    }
 }
 
 </script> 
@@ -53,14 +31,11 @@ function shuffle(myArray) {
 {% block sub_page_head %}{% endblock %}
 
 {% block subcontent %}
-  <div class="carousel-body"> 
-    <!-- uncomment to view carousel -->
-    <div class="carousel-menu"> 
-        <!-- <a id="featured_content" href='{% url 'chronam_search_pages_results' ><strong>100 Years Ago Today</strong>: </a> -->
-        <a id="featured_content" href='{% url 'chronam_home' %}'><strong>Featured Content</strong>: </a>
-    </div> 
-    <ul id="mycarousel" class="jcarousel-skin-tango"> 
-    </ul> 
-  </div><!-- end carousel-body --> 
+    <div class="featured_header"> 
+       <strong>Featured Content</strong>
+    </div>
+    <div class="featured_content" id="featured_content"> 
+    </div>
+  </div> 
   <div class="clear"><!-- --></div> 
 {% endblock subcontent %}  

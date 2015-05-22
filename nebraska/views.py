@@ -27,6 +27,7 @@ from chronam.core.utils.utils import HTMLCalendar, create_crumbs
 
 # Home
 def home(request):
+    base_path = request.META['HTTP_HOST']
     # The featured content is being pulled by ajax
     return render_to_response('home.html',
                            dictionary=locals(),

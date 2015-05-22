@@ -1,16 +1,37 @@
 [
   {
-    full_url: "http://cors1303.unl.edu/lccn/sn99067057/1917-05-08/ed-1/seq-1/
-",
-    thumbnail_url: "http://cors1303.unl.edu/lccn/sn99067057/1917-05-08/ed-1/seq-1/thumbnail.jpg"
-    label: "",
-    title: "Ozvêna Západu",
-    date: "May 8, 1917"
+    "full_url": "/lccn/sn99067057/1917-05-08/ed-1/seq-1/",
+    "thumbnail_url": "/lccn/sn99067057/1917-05-08/ed-1/seq-1/thumbnail.jpg",
+    "label": "",
+    "title": "Ozvêna Západu",
+    "date": "May 8, 1917"
   },
   {
-    full_url: "http://cors1303.unl.edu/lccn/sn99067057/1917-01-17/ed-1/seq-1/",
-    thumbnail_url: "http://cors1303.unl.edu/lccn/sn99067057/1917-01-17/ed-1/seq-1/thumbnail.jpg",
-    label: "",
-    title: "Ozvêna Západu",
-    date: "January 17, 1917"
+    "full_url": "/lccn/sn99067057/1917-01-17/ed-1/seq-1/",
+    "thumbnail_url": "/lccn/sn99067057/1917-01-17/ed-1/seq-1/thumbnail.jpg",
+    "label": "",
+    "title": "Ozvêna Západu",
+    "date": "January 17, 1917"
+  },
+  {
+    "full_url": "/lccn/46032385/1901-06-07/ed-1/seq-4/",
+    "thumbnail_url": "/lccn/46032385/1901-06-07/ed-1/seq-4/thumbnail.jpg",
+    "label": "",
+    "title": "The Commoner",
+    "date": "June 7, 1901"
+  },
+  {
+    "full_url": "/lccn/46032385/1914-01-01/ed-1/seq-17/",
+    "thumbnail_url": "/lccn/46032385/1914-01-01/ed-1/seq-17/thumbnail.jpg",
+    "label": "",
+    "title": "The Commoner",
+    "date": "January 1, 1914"
+  },
+  {
+    "full_url": "/lccn/46032385/1919-06-01/ed-1/seq-1/",
+    "thumbnail_url": "/lccn/46032385/1919-06-01/ed-1/seq-1/thumbnail.jpg",
+    "label": "",
+    "title": "The Commoner",
+    "date": "June 1, 1919"
   }
+]
