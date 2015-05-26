@@ -70,3 +70,5 @@ There are some settings for that script.  If you open it up, you can see that yo
 This script will effectively bring the server to its knees, as it is running the image conversion across all the cores.  If you need the website to stay live while you are pregenerating thumbnails, edit the line of the script where find pipes its results to parallel and remove `--jobs 200%`.  This should dramatically reduce the load on the server.
 
 Even for small batches this script may take several hours to run.
+
+NOTE:  Since we are beginning to add tiffs for each batch, you may wish to alter the script to generate thumbnails from the tiffs instead of the jp2s, which would be about 8 times faster, by our estimations.
