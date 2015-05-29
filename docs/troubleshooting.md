@@ -5,6 +5,7 @@ Permission Denied When Uploading to Server
 --------------
 
 You'll need to make sure that the directory where you are uploading the batch files allows you writing permissions.  Verify that you are in the `cdrh` group.
+
     sudo chown -R apache:cdrh /batches/batch_name/
     sudo chmod -R ug+rwx /batches/batch_name/
     
