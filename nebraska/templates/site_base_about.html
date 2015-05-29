@@ -7,6 +7,18 @@
 {% block main_content %}
 
   {% block about_nav %}
+  
+
+<ul class="nav nav-pills">
+  <li role="presentation"><a href="{% url 'chronam_about' %}">About</a></li>
+  <li role="presentation"><a href="{% url 'chronam_adding' %}">Adding</a></li>
+  <li role="presentation"><a href="{% url 'chronam_nnp' %}">The Nebraska Newspaper Project</a></li>
+  <li role="presentation"><a href="{% url 'chronam_ndnp' %}">The National Digital Newspaper Project</a></li>
+  <li role="presentation"><a href="{% url 'chronam_access' %}">Access</a></li>
+  <li role="presentation"><a href="{% url 'chronam_contact' %}">Contact</a></li>
+</ul>
+<br/>
+  <!--
     <ul id="about_nav">
       <li>
         <a href="{% url 'chronam_about' %}">About</a>
@@ -26,6 +38,6 @@
       <li>
         <a href="{% url 'chronam_contact' %}">Contact</a>
       </li>
-    </ul>
+    </ul>-->
   {% endblock about_nav %}
 {% endblock main_content %}

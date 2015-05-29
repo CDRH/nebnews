@@ -8,6 +8,7 @@
 {% ifequal paginator.count 0 %}
 <h2>No Results</h2>
 {% else %}
+<br/>
 <ul class="results_list">
     {% for num, object in page_list %}
       {% with object.issue.title as title %}
@@ -20,5 +21,6 @@
     <a href="#skip_menu">Top</a>
     </p>
 </div>
+</div><!-- /container --> <!-- I don't know why this works -->
 {% endifequal %}
 {% endblock %}

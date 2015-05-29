@@ -9,14 +9,24 @@
 <script type="text/javascript"> 
 $(document).ready(setupFeatured);
 
+function pickPages(results, number) {
+    // sort randomly and then pick first however many specified 
+    results.sort( function() {
+      return 0.5 - Math.random()
+    });
+    return results.slice(0, number);
+};
+
 function setupFeatured() {
     // lookup featured pages and choose one randomly to display
     var url = "featured.json";
     $.getJSON(url, function(results) {
         if (results && results.length > 0) {
-          var page = results[Math.floor(Math.random()*results.length)];
-          var content = $('#featured_content');
-          content.append($('<a href="' + page.full_url +'"><img class="thumbnail" src="' + page.thumbnail_url + '" width="200" height="286" alt="' + page.label + '"/></><span><a href="' + page.full_url + '"><strong>' + page.date + '</strong><br />'+ page.title + '</a></span>'));
+          var pages = pickPages(results, 4);
+          pages.forEach(function(page) {
+            var content = $('#featured_content');
+            content.append($('<li><a href="' + page.full_url +'"><img class="thumbnail" src="' + page.thumbnail_url + '" alt="' + page.label + '"/><span>' + page.date + '<br />'+ page.title + '</span></a></li>'));
+          });
         }
 
     }).fail(function(e) { 
@@ -31,11 +41,74 @@ function setupFeatured() {
 {% block sub_page_head %}{% endblock %}
 
 {% block subcontent %}
-    <div class="featured_header"> 
-       <strong>Featured Content</strong>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Welcome to the Nebraska Newspapers site</h2>
+        
+        <p>Nebraska Newspapers is a collaborative site developed by the University of Nebraska–Lincoln and the Nebraska State Historical Society. It presents many resources relating to the State's papers such as searchable full-text of selected newspapers published in the state before 1923 and information about historically significant newspapers. Editorials cover different social, political, and economic viewpoints from various regions of Nebraska.</p>
+        
+        <p>In the future, we hope to present content from more communities and to offer Native American and more foreign-language newspapers.</p>
+        
+        <p>We are indebted to the National Endowment for the Humanities and the Library of Congress for the pioneering work of the United States Newspaper Program and the National Digital Newspaper Program. The national projects have made the state projects possible.</p>
     </div>
-    <div class="featured_content" id="featured_content"> 
+    <div class="col-md-8">
+        <h3>Featured Content</h3>
+        
+        <ul class="featured_content" id="featured_content"> 
+        </ul>
+        
+        <noscript>
+        <ul class="featured_content" id="featured_content"> 
+            <li>
+                <a href="/lccn/46032385/1914-01-01/ed-1/seq-17/"><img class="thumbnail" src="/lccn/46032385/1914-01-01/ed-1/seq-17/thumbnail.jpg" alt="4">
+                    <span>
+                        January 1, 1914
+                        <br/>
+                        The Commoner
+                        
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="/lccn/sn99067057/1917-01-17/ed-1/seq-1/"><img class="thumbnail" src="/lccn/sn99067057/1917-01-17/ed-1/seq-1/thumbnail.jpg" alt="4">
+                    <span>
+                        Ozvêna Západu
+                        <br/>
+                        Ozvêna Západu
+                        
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="/lccn/sn96080292/1914-05-20/ed-1/seq-1/"><img class="thumbnail" src="/lccn/sn96080292/1914-05-20/ed-1/seq-1/thumbnail.jpg" alt="4">
+                    <span>
+                        May 20, 1914
+                        <br/>
+                        Wilberské listy
+                        
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="/lccn/sn96080312/1927-05-27/ed-1/seq-1/"><img class="thumbnail" src="/lccn/sn96080312/1927-05-27/ed-1/seq-1/thumbnail.jpg" alt="4">
+                    <span>
+                        May 27, 1927
+                        <br/>
+                        The Daily Nebraskan
+                        
+                    </span>
+                </a>
+            </li>
+        </ul>
+        </noscript>
     </div>
-  </div> 
+</div>
+
+
+
+
+
+<br/><br/>
   <div class="clear"><!-- --></div> 
 {% endblock subcontent %}  

@@ -4,9 +4,10 @@ from chronam.core.decorator import cache_page
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
+# Karin changed this from "About Chronicling america" to "about Nebraska Newspapers"
 @cache_page(settings.DEFAULT_TTL_SECONDS)
 def about(request):
-    page_title = "About Chronicling America"
+    page_title = "About Nebraska Newspapers"
     crumbs = list(settings.BASE_CRUMBS)
     crumbs.extend([
         {'label':'About',

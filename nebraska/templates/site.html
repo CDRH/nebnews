@@ -5,8 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
-  <link href="{% static 'css/main.css' %}" rel="stylesheet" media="screen">
+  
+  
+  <link href="/media/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="/media/css/main.css" rel="stylesheet" media="screen">
+  
+<!--
+  <link href="{# static 'bootstrap/css/bootstrap.min.css' #}" rel="stylesheet" media="screen">
+  <link href="{# static 'css/main.css' #}" rel="stylesheet" media="screen">
+-->
 
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -41,6 +48,7 @@
               <li><a href="{% url 'chronam_newspapers' %}">Newspapers</a></li>
               <li><a href="{% url 'chronam_places' %}">City</a></li>
               <li><a href="{% url 'chronam_calendar' %}">Date</a></li>
+          
             </ul>
             
             <ul class="nav navbar-nav navbar-right">
@@ -58,12 +66,32 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <form class="navbar-form navbar-left" action="{% url 'chronam_search_pages_results' %}" method="get" role="search">
               <div class="form-group">
-                <select class="form-control">
-                  <option>All Cities</option>
-                  <option>Lincoln</option>
-                  <option>Omaha</option>
-                  <option>Beatrice</option>
-                  <option>Other Cool city</option>
+                <select class="form-control" id="id_city" name="city">
+                  <option value="">All Cities</option>
+                  <option value="Alliance">Alliance</option>
+                  <option value="Auburn">Auburn</option>
+                  <option value="Bellevue">Bellevue</option>
+                  <option value="Broken Bow">Broken Bow</option>
+                  <option value="Brownville">Brownville</option>
+                  <option value="Calvert">Calvert</option>
+                  <option value="Clarkson">Clarkson</option>
+                  <option value="Columbus">Columbus</option>
+                  <option value="Dakota City">Dakota City</option>
+                  <option value="Falls City">Falls City</option>
+                  <option value="Lincoln">Lincoln</option>
+                  <option value="McCook">McCook</option>
+                  <option value="Nemaha">Nemaha</option>
+                  <option value="Nemaha City">Nemaha City</option>
+                  <option value="Norfolk">Norfolk</option>
+                  <option value="North Platte">North Platte</option>
+                  <option value="Omaha">Omaha</option>
+                  <option value="Plattsmouth">Plattsmouth</option>
+                  <option value="Red Cloud">Red Cloud</option>
+                  <option value="Shelton">Shelton</option>
+                  <option value="Valentine">Valentine</option>
+                  <option value="Wahoo">Wahoo</option>
+                  <option value="Wilber">Wilber</option>
+                  <option value="Wood River Centre">Wood River</option>
                 </select>
                 <input type="hidden" name="rows" id="rows" alt="rows" value="20" />
                 <input type="hidden" name="searchType" alt="searchType" value="basic" />
@@ -131,16 +159,58 @@
       <!--     <pre> {# filter force_escape #} {# debug #} {# endfilter #} </pre> -->
 
       
-      <div class="container">{% if crumbs and crumbs|length > 1 %}
+      <div class="container">
+        <!-- commenting out breadcrumbs, if we want to use them, we will need to add crumbs for our created pages, city, date, etc.  -->
+        
+        <!--
+        {% if crumbs and crumbs|length > 1 %}
         
         <ul class="breadcrumb">{% for crumb in crumbs %}
           <li {% if crumb.active %}class="active"{% endif %}><a href="{{crumb.href}}">{{crumb.label}}</a>{% if forloop.last %}{% else %} <span class="divider">/</span>{% endif %}</li>{% endfor %}
-        </ul>{% endif %}{% block content %}{% endblock content %}
+        </ul>{% endif %} -->
         
         
-      </div>{% endblock body_content %}{% block javascript %}
-      <script src="{% static 'js/jquery.min.js' %}"></script>
-      <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>{% endblock javascript %}
+        {% block content %}{% endblock content %}
+        
+        
+      </div>
+      
+      <div class="footer">
+        <div class="container">
+          <ul>
+            <li><a href="{% url 'chronam_home' %}">Home</a></li>
+            <li><a href="{% url 'chronam_newspapers' %}">Newspapers</a></li>
+            <li><a href="{% url 'chronam_places' %}">City</a></li>
+            <li><a href="{% url 'chronam_calendar' %}">Date</a></li>
+   
+            <li><a href="{% url 'chronam_publishing' %}">Publishing History</a></li>
+            <li><a href="{% url 'chronam_help' %}">Help</a></li>
+            <li><a href="{% url 'chronam_about' %}">About</a></li> 
+            
+            <li><a href="/search/advanced/">Advanced Search</a></li>
+          </ul>
+          
+          <div class="foot_logos">
+            <a href="http://unl.edu" class="unl"><img src="/media/img-foot/unl.png"/></a>
+            <a href="http://www.neh.gov/" class="neh"><img src="/media/img-foot/logo_NEH.png"/></a>
+            <a href="http://www.nebraskahistory.org/index.shtml" class="nshs"><img src="/media/img-foot/logo_nshs.png"/></a>
+          </div>
+        </div>
+      </div>
+      
+      
+      {% endblock body_content %}{% block javascript %}
+
+      
+      <script src="/media/js/jquery.min.js"></script>
+      <script src="/media/bootstrap/js/bootstrap.min.js"></script>
+      
+<!--
+      <script src="{# static 'js/jquery.min.js' #}"></script>
+      <script src="{# static 'bootstrap/js/bootstrap.min.js' #}"></script>
+-->
+      
+      {% endblock javascript %}
       <script type="text/javascript">
         (function($) {
           function initPage() {

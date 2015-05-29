@@ -4,8 +4,13 @@
 {% load static from staticfiles %}
     <title>Chronicling America - The Library of Congress</title>
     <style type="text/css">
-        @import url({% static 'css/ca_print.css' %});
+        @import url(/media/css/ca_print.css);
     </style>
+<!--
+    <style type="text/css">
+        @import url({# static 'css/ca_print.css' #});
+    </style>
+-->
 {% url 'chronam_page' title.lccn page.issue.date_issued page.issue.edition page.sequence as url %}
     <link rel="canonical" href="http://{{host}}{{url}}" />
   </head>
