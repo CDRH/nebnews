@@ -42,3 +42,32 @@ Though the static file caching is operational (django is requesting things like 
 ```
 
 Apache is looking for requests to /media/ in the .static-media directory, so as long as a file by that name exists there, it should be good to go.  This type of path will not work if you are running the application under a sub-uri.
+
+Below is a list of files we changed to get around the static file loading problem. For now, we just commented out the old code, possibly to be reverted later. 
+
+#### Header files changed:
+
+* base.html
+* newspapers.html
+* page_print.html
+* page_text.html
+* page.html
+* places.html
+* search_advanced.html
+* site.html
+
+
+#### Image files changed:
+
+* base.html
+* holdings.html
+* ndnp.html
+* newspapers.html
+* page.html
+* search_pages_results_orig.html
+* search_pages_results.html
+* search_titles_results.html
+* tabs.html
+* title.html
+* titles_browse_ctrl.html
+* titles_results_ctrl.html
