@@ -40,15 +40,6 @@
 
 {% block page_nav %} 
 
-
-
-
-
-
-
-
-
-
         <ul class="nav nav-pills">
             <li role="presentation"><a id="page_nav_title" href="{% url 'chronam_title' title.lccn %}"> {{title.display_name}}  Main Page</a></li>
             {% if title.has_issues %}<li role="presentation"><a id="page_nav_issues" href="{% url 'chronam_issues' title.lccn %}">Browse Issues by Date</a></li>{% endif %}
@@ -71,16 +62,6 @@
     <a href="{% url 'chronam_issues_first_pages' title.lccn %}" class="btn btn-primary">All front pages</a>
 </div>
 -->
-
-
-
-
-
-
-
-
-
-
 
 
 {% endblock page_nav %}
