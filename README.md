@@ -25,8 +25,27 @@ maintenance and troubleshooting of the Nebraska Newspapers website.
 
 - [Installation](./docs/install.md)
 - [Adding a Batch](./docs/new_batch.md)
-- [Changing / Adding a webpage](./docs/change_page.md)
-- [Changing / Adding CSS / JS](./docs/static.md)
+- [Adding / Editing a webpage](./docs/change_page.md)
+- [Configuration](./docs/config.md)
+- [Adding / Editing an Essay](./docs/essays.md)
+- [Adding / Editing CSS / JS](./docs/static.md)
+- [Info About Locations](./docs/location.md)
 - [Updating from Chronam Repo](./docs/updating.md)
-- [Finding a Batch](./docs/batches.md)
-- [Tests](./docs/tests.md)
+- [Information About Nebraska Batches and Issues](./docs/batches.md)
+- [Troubleshooting](./docs/troubleshooting.md)
+
+### Quick Reference
+
+To restart django
+
+```
+touch /opt/chronam/conf/chronam.wsgi
+```
+
+To get into django command mode
+
+```
+source /opt/chronam/ENV/bin/activate
+export DJANGO_SETTINGS_MODULE=chronam.settings
+django-admin.py  # will list commands if executed as is
+```
