@@ -34,3 +34,4 @@ def get_ext_url(url, timeout=None):
         # store in cache for 1 day
         cache.set(url, content, 86400)
     return content
+    

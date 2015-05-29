@@ -1,0 +1,174 @@
+<!DOCTYPE html>{% load static from staticfiles %}<html lang="en" class="{% block page_class %}{% endblock %}"  >
+<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">{% block head_content %}
+  <meta charset="utf-8">
+  <title>{% if page_title %}{{page_title}} « {% endif %}{% if site_title %}{{site_title}} « {% endif %}Library of Congress</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  
+  
+  <link href="/media/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="/media/css/main.css" rel="stylesheet" media="screen">
+  
+<!--
+  <link href="{# static 'bootstrap/css/bootstrap.min.css' #}" rel="stylesheet" media="screen">
+  <link href="{# static 'css/main.css' #}" rel="stylesheet" media="screen">
+-->
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->{% endblock head_content %}
+    </head>
+    <body>{% block body_content %}
+      
+      <div class="header">
+        <h1 class="title"><span class="nebraska">Nebraska</span> <span class="newspapers">Newspapers</span></h1>
+      </div>
+      
+      <!-- New new bootstrap 3 navbar -->
+      
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <!--       <a class="navbar-brand" href="#">Brand</a> -->
+          </div>
+          
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a href="{% url 'chronam_home' %}">Home</a></li>
+              <li><a href="{% url 'chronam_newspapers' %}">Newspapers</a></li>
+              <li><a href="{% url 'chronam_places' %}">City</a></li>
+              <li><a href="{% url 'chronam_calendar' %}">Date</a></li>
+          
+            </ul>
+            
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="{% url 'chronam_publishing' %}">Publishing History</a></li>
+              <li><a href="{% url 'chronam_help' %}">Help</a></li>
+              <li><a href="{% url 'chronam_about' %}">About</a></li>      
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+      
+      <nav class="navbar navbar-default navbar-second">
+        <div class="container">
+          <div class="navbar-center">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <form class="navbar-form navbar-left" action="{% url 'chronam_search_pages_results' %}" method="get" role="search">
+              <div class="form-group">
+                <select class="form-control" id="id_city" name="city">
+                  <option value="">All Cities</option>
+                  <option value="Alliance">Alliance</option>
+                  <option value="Auburn">Auburn</option>
+                  <option value="Bellevue">Bellevue</option>
+                  <option value="Broken Bow">Broken Bow</option>
+                  <option value="Brownville">Brownville</option>
+                  <option value="Calvert">Calvert</option>
+                  <option value="Clarkson">Clarkson</option>
+                  <option value="Columbus">Columbus</option>
+                  <option value="Dakota City">Dakota City</option>
+                  <option value="Falls City">Falls City</option>
+                  <option value="Lincoln">Lincoln</option>
+                  <option value="McCook">McCook</option>
+                  <option value="Nemaha">Nemaha</option>
+                  <option value="Nemaha City">Nemaha City</option>
+                  <option value="Norfolk">Norfolk</option>
+                  <option value="North Platte">North Platte</option>
+                  <option value="Omaha">Omaha</option>
+                  <option value="Plattsmouth">Plattsmouth</option>
+                  <option value="Red Cloud">Red Cloud</option>
+                  <option value="Shelton">Shelton</option>
+                  <option value="Valentine">Valentine</option>
+                  <option value="Wahoo">Wahoo</option>
+                  <option value="Wilber">Wilber</option>
+                  <option value="Wood River Centre">Wood River</option>
+                </select>
+                <input type="hidden" name="rows" id="rows" alt="rows" value="20" />
+                <input type="hidden" name="searchType" alt="searchType" value="basic" />
+                <input class="span2 form-control" type="text" name="proxtext" placeholder="">
+              </div>
+              
+              <button type="submit" class="btn btn-default">Search</button>
+              
+            </form>
+            
+            <ul class="nav navbar-nav">
+              <li><a href="/search/advanced/">Advanced Search</a></li>
+            </ul>
+          </div>
+        </div><!-- /.container-fluid -->
+      </nav>
+      
+      
+      <div class="container">
+        <!-- commenting out breadcrumbs, if we want to use them, we will need to add crumbs for our created pages, city, date, etc.  -->
+        
+        <!--
+        {% if crumbs and crumbs|length > 1 %}
+        
+        <ul class="breadcrumb">{% for crumb in crumbs %}
+          <li {% if crumb.active %}class="active"{% endif %}><a href="{{crumb.href}}">{{crumb.label}}</a>{% if forloop.last %}{% else %} <span class="divider">/</span>{% endif %}</li>{% endfor %}
+        </ul>{% endif %} -->
+        
+        
+        {% block content %}{% endblock content %}
+        
+        
+      </div>
+      
+      <div class="footer">
+        <div class="container">
+          <ul>
+            <li><a href="{% url 'chronam_home' %}">Home</a></li>
+            <li><a href="{% url 'chronam_newspapers' %}">Newspapers</a></li>
+            <li><a href="{% url 'chronam_places' %}">City</a></li>
+            <li><a href="{% url 'chronam_calendar' %}">Date</a></li>
+   
+            <li><a href="{% url 'chronam_publishing' %}">Publishing History</a></li>
+            <li><a href="{% url 'chronam_help' %}">Help</a></li>
+            <li><a href="{% url 'chronam_about' %}">About</a></li> 
+            
+            <li><a href="/search/advanced/">Advanced Search</a></li>
+          </ul>
+          
+          <div class="foot_logos">
+            <a href="http://unl.edu" class="unl"><img src="/media/img-foot/unl.png"/></a>
+            <a href="http://www.neh.gov/" class="neh"><img src="/media/img-foot/logo_NEH.png"/></a>
+            <a href="http://www.nebraskahistory.org/index.shtml" class="nshs"><img src="/media/img-foot/logo_nshs.png"/></a>
+          </div>
+        </div>
+      </div>
+      
+      
+      {% endblock body_content %}{% block javascript %}
+
+      
+      <script src="/media/js/jquery.min.js"></script>
+      <script src="/media/bootstrap/js/bootstrap.min.js"></script>
+      
+<!--
+      <script src="{# static 'js/jquery.min.js' #}"></script>
+      <script src="{# static 'bootstrap/js/bootstrap.min.js' #}"></script>
+-->
+      
+      {% endblock javascript %}
+      <script type="text/javascript">
+        (function($) {
+          function initPage() {
+            $('ul.nav > li > a[href="' + document.location.pathname + '"]').parent().addClass('active');
+          }
+          $(initPage);
+        })(jQuery)
+      </script>
+    </body>
+    </html>

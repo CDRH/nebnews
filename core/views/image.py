@@ -33,21 +33,24 @@ else:
     LOGGER.info("Using NativeImage backend '%s'" % backend)
 
 
-def _get_image(page):
+def _get_image(page, static=False):
     if settings.USE_TIFF:
         filename = page.tiff_filename
     else:
         filename = page.jp2_filename
     if not filename:
         raise Http404
+    if static:
+        # if the image has been pregenerated, use the jpg
+        filename = filename[:-3]+"jpg"
     batch = page.issue.batch
     url = urlparse.urljoin(batch.storage_url, filename)
     try:
         fp = urllib2.urlopen(url)
         stream = StringIO(fp.read())
     except IOError, e:
-        e.message += " (while trying to open %s)" % url
-        raise e
+        e.message += " (while trying to open %s). Check that file exists and permissions are correct" % url
+        raise Exception(e)
     im = Image.open(stream)
     return im
 
@@ -65,10 +68,13 @@ def _get_resized_image(page, width):
 
 def thumbnail(request, lccn, date, edition, sequence):
     page = get_page(lccn, date, edition, sequence)
-    try:
-        im = _get_resized_image(page, settings.THUMBNAIL_WIDTH)
-    except IOError, e:
-        return HttpResponseServerError("Unable to create thumbnail: %s" % e)
+    if settings.PREGEN_THUMBNAILS:
+        im = _get_image(page, True)
+    else:
+        try:
+            im = _get_resized_image(page, settings.THUMBNAIL_WIDTH)
+        except IOError, e:
+            return HttpResponseServerError("Unable to create thumbnail: %s" % e)
     response = HttpResponse(mimetype="image/jpeg")
     im.save(response, "JPEG")
     return response

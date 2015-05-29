@@ -1,0 +1,80 @@
+{% extends "site_base.html" %}
+
+{% load static from staticfiles %}
+
+
+
+{% block main_content %}
+
+<div class="alert alert-warning" role="alert">
+    <p>Notice: Our images are currently somewhat slow to load. We are in the process of making changes to speed up image delivery.  Thank you for your patience.</p>
+</div>
+
+
+
+<hr />
+
+<p>Below is a brief walkthrough of the Nebraska Newspapers site. The software used to build the site is the <a href="https://github.com/LibraryofCongress/chronam">Chronicling America software</a> from the <a href="http://chroniclingamerica.loc.gov/">Library of Congress&#8217;s Chronicling America site</a>. For more complete help, please visit <a href="http://chroniclingamerica.loc.gov/help/">their help page</a>. </p>
+
+<hr />
+
+<p>Nebraska Newspapers offers 4 ways to browse the content: Newspapers, City, Date, and Search. </p>
+
+<h3 id="newspapers">Newspapers</h3>
+
+<p>On the Newspapers page, you&#8217;ll find a sortable list of all the newspapers currently in the website. You can sort by clicking at the top of any of the columns. </p>
+
+<img src="/media/images/help_image_001.png" class="help_images"/>
+
+<p>Some newspapers changed names over time, and in this list, you will see them represented as different papers to reflect their Library of Congress records. </p>
+
+<h3 id="city">City</h3>
+
+<p>The City Browse page allows you to explore newspapers via an interactive map, where you can zoom in or out of the map and choose the historic map overlay or the plain map. There is also a list of cities and the newspapers available for each site below the map. </p>
+
+<img src="/media/images/help_image_002.png" class="help_images"/>
+
+<h3 id="date">Date</h3>
+
+<p>The date view allows you to choose a year and date and see all the papers available on that day. Lighter color squares indicate a single newspaper title is available, while darker squares indicate multiple titles. Clicking on a date will allow you to choose which newspaper you&#8217;d like to view. </p>
+
+<img src="/media/images/help_image_003.png" class="help_images"/>
+
+<h3 id="search">Search</h3>
+
+<p>You can search on any page using the search form located at the top of the page, and you can limit that search by city. </p>
+
+<img src="/media/images/help_image_004.png" class="help_images"/>
+
+<p>For more advanced search options, visit the advanced search page. There, you will find the following options. If you leave any of the options blank, the search defaults to all of that option. </p>
+
+
+<p><strong>Newspaper(s):</strong> You can select one or more papers to search here. To select multiple titles, hold down Control (PC) or Command (Mac). </p>
+
+<img src="/media/images/help_image_005.png" class="help_images"/>
+
+<p><strong>Page:</strong> You can limit your search by a specific page–in case, for instance, you are searching a feature that always appears on page 2 of a certain paper.</p>
+
+<p><strong>Language:</strong> To search by language, choose the language from the dropdown.</p>
+
+<p>Note on language search: The searchable text for the National Digital Newspaper Program is created using Optical Character Recognition (OCR) which is performed by computers. While this technology has come a long way, it is not perfect, and it is particularly bad at foreign languages at this time. For best results, try searching without accented characters (i.e. &#8220;Ozvêna západu&#8221; becomes &#8220;Ozvena zapadu&#8221;).</p>
+
+<p><strong>Date Range:</strong> Use the drop downs to choose a date range for your search. </p>
+
+<p>Note on date search: There is an ongoing effort to clean up the dates on some of our newspapers. Some of the dates are incorrect because the newspaper originally listed it incorrectly, and some are incorrect because of digitization errors. Regardless, these errors will affect your date searches, and we are working to identify these problems and clean them up. </p>
+
+<p>The date range is automatically set to search the entire range of newspapers we have, so only set a date range if you want to narrow your search. </p>
+
+<p><strong>with any of the words:</strong> This option does an &#8220;or&#8221; search on a list of words. For instance, &#8220;Inside the city limits&#8221; will search for &#8220;Inside OR the OR city OR limits”</p>
+
+<p><strong>with all of the words:</strong> This option will search for all of the words you enter, but not in any particular order. For instance, &#8220;Inside the city limits&#8221; will search for &#8220;Inside AND the AND city AND limits&#8221; and show you all the results for those words anywhere on the page. </p>
+
+<p><strong>with the phrase:</strong> This search will look for an exact phrase, but will ignore letter case. For instance, &#8220;Inside the city limits&#8221; will also show results for &#8220;inside the city limits&#8221; and &#8220;Inside The City Limits.&#8221;</p>
+
+<p>All searches will take you to a page which highlights your search terms (if there are any) in red. </p>
+
+
+<p class="backtotop"><a href="#skip_menu">Top</a></p>
+</div><!-- end id:std_box -->
+
+{% endblock %}

@@ -6,3 +6,6 @@ data/batches
 data/ocr
 data/word_coordinates
 .static-media/
+
+# Test batch to verify that the thumbnail generation was working
+test_conversion/

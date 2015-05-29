@@ -8,8 +8,8 @@ from django.db.models import Min, Max
 
 from chronam.core import models
 
-MIN_YEAR = 1860
-MAX_YEAR = 1922
+MIN_YEAR = 1821
+MAX_YEAR = 1966
 DAY_CHOICES = [(i, i) for i in range(1,32)]
 MONTH_CHOICES = ((1, u'Jan',), (2, u'Feb',), (3, u'Mar',),
                  (4, u'Apr',), (5, u'May',), (6, u'Jun',),
@@ -70,7 +70,11 @@ def _titles_states():
 
 
 def _fulltext_range():
-    fulltext_range = cache.get('fulltext_range')
+    # For an unknown reason, the cache is not being set. Since our range exceeds
+    # the default set by the library of congress, I'm moving the cached version
+    # from the equation and using our preset dates above.
+    fulltext_range = None
+    # fulltext_range = cache.get('fulltext_range')
     if not fulltext_range:
         # get the maximum and minimum years that we have content for
         issue_dates = models.Issue.objects.all().aggregate(min_date=Min('date_issued'),

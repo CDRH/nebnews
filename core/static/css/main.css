@@ -1,79 +1,155 @@
-/* @override http://spacely.unl.edu/cocoon/teitest/assets/css/main.css */
+body {
+	background: #efefea url(../images/full_backdrop.png) no-repeat center -170px;
+}
 
-/* @override http://spacely.unl.edu/cocoon/teitest/assets/css/main.css */
+.header {
+	padding: 1.5em 0;
+	margin: 0;
+}
 
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
-   
- .navbar {
-	border: 1px solid #e3e2cf;
+.header h1 {
+	padding: .2em;
+	margin: 0;
+}
+
+.navbar {
+	font-family: 'Oranienbaum';
+	background-color: RGBA(255,255,255,.7);
+	border: double #000 3px;
 	border-right: none;
 	border-left: none;
-	
-	font-family: "Roboto Condensed";
-	background-color: white;
-	/*-webkit-box-shadow: 0px 0px 5px 0px rgba(0,11,170,1);
--moz-box-shadow: 0px 0px 5px 0px rgba(0,11,170,1);*/
-box-shadow: 0px 0px 4px 0px #aaa;
+	margin: 0;
+}
 
-font-size: 1.4em;
+@media (min-width: 768px) {
 
+	h1 .nebraska {
+		margin-left: .9em;
+	}
 	
-}  
+	h1 .newspapers {
+		padding-left: 1.6em;
+	}
+	
+	h1..title {
+		font-size: 4em;
+		
+		line-height: .95em;
+		
+		font-weight: 700;
+		font-variant: small-caps;
+	}
+
+
+}
+
+@media (min-width: 992px) {
+	h1..title {
+		font-size: 6em;
+		}
+	}
+
+h1.title {
+	font-family: 'Oranienbaum', serif;
+	text-align: center;
+}
 
 .navbar a {
 	text-decoration: none;
 }
 
-.navbar .container {
+.navbar-right {
+	font-size: .9em;
+}
+
+
+.navbar-second {
+	border: solid 3px #000;
+	border-right: none;
+	border-left: none;
+	border-top: none;
+}
+
+/* To center the search */
+
+@media (min-width: 768px) {
+
+	.navbar-second .container {
+		text-align: center;
+	}
+	
+	.navbar-center {
+		display: inline-block;
+		margin-bottom: -7px;
+	}
+
+}
+
+
+
+/* calendar */
+
+.calendar_wrapper {
+	/*font-family: arial;*/
+}
+
+.calendar_month {
+	display: inline-block;
+	margin: 0 10px 0 0px;
+	background-color: #fff;
+	text-align: center;
+	vertical-align: top;
+}
+
+.calendar_wrapper .title {
+	background-color: #deded8;
+	font-size: 1em;
+}
+
+div.calendar_wrapper .calendar_month td {
+	padding: 4px;
+}
+
+div.calendar_wrapper  .dropdown-toggle {
+	padding: 0;
+	margin: 0;
+}
+
+.calendar_wrapper .table {
+	padding: 0;
+	margin: 0;
+}
+
+
+div.calendar_wrapper table.month td.single {
+	background-color: #e6e8e0;
+	
+}
+div.calendar_wrapper table.month td.multiple {
+    
+    background-color: #c8cac3;
+    
+}
+
+.calendar_wrapper .btn-group a {
+	color: #860e00;
+	text-decoration: none;
 	
 }
 
-.navbar-right {
-	font-size: .7em;
-	font-family: "Times New Roman";
-}
-
-.title {
-	font-size: 6em;
-	text-align: center;
-	line-height: .95em;
-	color: #3b0a00;
-	margin-bottom: .3em;
-}
-
-.nebraska {
-	/*display: block;*/
-	font-size: 1em;
-	/*margin-left: .5em;*/
-	font-variant: normal;
-	border-style: none;
-	border-bottom: 5px double #8b0f00;
-	letter-spacing: .05em;
-	color: #3b0a00;
+.calendar_wrapper td {
+	width: 2.2em;
 }
 
 
 
-.newspapers {
-	display: block;
-	font-family: "Times New Roman";
-	font-size: 1.1em;
-	font-weight: 700;
-	letter-spacing: .02em;
-	color: #000;
-}
-
-body {margin-bottom: 200px;}
-					
 
 
 
 
 
 
-/* LOC Styles */
+ LOC Styles 
 
 @media (max-width: 979px) {
 	body {

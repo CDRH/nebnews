@@ -6,6 +6,8 @@ from django.utils import cache
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from chronam.core.views import home, image, search
+from chronam.nebraska import views
+from chronam.nebraska import urls
 
 handler404 = 'django.views.defaults.page_not_found'
 handler500 = 'django.views.defaults.server_error'
@@ -20,7 +22,35 @@ def cache_page(function, ttl):
         return response
     return decorated_function
 
-urlpatterns = patterns(
+
+# TODO these are custom urls for Nebraska and should
+# be moved at some point to their own file
+# Putting them at the top overrides similar ones below
+urlpatterns = patterns('chronam.nebraska.views', 
+  # home and featured page
+  url(r'^$', 'home', name="chronam_home"),
+  url(r'^featured.json$', 'featured', name='chronam_featured'),
+  # static pages
+  url(r'^places/$', 'places', name="chronam_places"),
+  url(r'^newspapers/$', 'newspapers', name="chronam_newspapers"),
+  url(r'^nebraska_publishing/$', 'nebraska_publishing', name="chronam_publishing"),
+  url(r'^info/about/adding/$', 'adding', name="chronam_adding"),
+  url(r'^info/about/NNP/$', 'nnp', name="chronam_nnp"),
+  url(r'^info/about/NDNP/$', 'ndnp', name="chronam_ndnp"),
+  url(r'^info/about/access/$', 'access', name="chronam_access"),
+  url(r'^info/about/contact/$', 'contact', name="chronam_contact"),
+
+  # example: /calendar/
+  url(r'^calendar/$', 'calendar_issues', name="chronam_calendar"),
+  # example: /calendar/1900
+  url(r'^calendar/(?P<year>\d{4})/$', 'calendar_issues', name="chronam_calendar"),
+
+  # adding a 404 and 500 page for testing purposes
+  url(r'^404/$', 'fourohfour', name="chronam_404"),
+  url(r'^500/$', 'fivehundred', name="chronam_500"),
+)
+
+urlpatterns += patterns(
     'chronam.core.views',
 
     url(r'^$',
@@ -71,6 +101,8 @@ urlpatterns = patterns(
         name="chronam_page_coordinates_words"),
         
 )
+
+
 
 urlpatterns += patterns(
     'chronam.core.views',
@@ -325,9 +357,9 @@ urlpatterns += patterns(
         'institution_titles', name='chronam_institution_titles_page_number'),
 
     # awardee
-    url(r'^awardees/(?P<institution_code>\w+)/$', 'awardee', 
+    url(r'^awardees/(?P<institution_code>\w+@?)/$', 'awardee', 
         name='chronam_awardee'),
-    url(r'^awardees/(?P<institution_code>\w+).json$', 'awardee_json', name='chronam_awardee_json'),
+    url(r'^awardees/(?P<institution_code>\w+@?).json$', 'awardee_json', name='chronam_awardee_json'),
 
 
     url(r'^status', 'status', name='chronam_stats'),
@@ -359,8 +391,8 @@ urlpatterns += patterns(
     url(r'^lccn/(?P<lccn>\w+)/(?P<date>\d{4}-\d{2}-\d{2})/ed-(?P<edition>\d+)/seq-(?P<sequence>\d+)$', 'page_rdf', name="chronam_page_rdf"),
 
     # awardee
-    url(r'^awardees/(?P<institution_code>\w+).rdf$', 'awardee_rdf', name='chronam_awardee_dot_rdf'),
-    url(r'^awardees/(?P<institution_code>\w+)$', 'awardee_rdf', name='chronam_awardee_rdf'),
+    url(r'^awardees/(?P<institution_code>\w+@?).rdf$', 'awardee_rdf', name='chronam_awardee_dot_rdf'),
+    url(r'^awardees/(?P<institution_code>\w+@?)$', 'awardee_rdf', name='chronam_awardee_rdf'),
 
     # ndnp vocabulary
     url(r'^terms/.*$', 'terms', name='chronam_terms'),

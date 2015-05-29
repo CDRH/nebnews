@@ -23,6 +23,9 @@ SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
 
+# Nebraska added so URLs can be /batches and it will find route to /batches/
+APPEND_SLASH = True
+
 MEDIA_ROOT = ''
 MEDIA_URL = ''
 
@@ -90,6 +93,8 @@ API_TTL_SECONDS = 60 * 60  # 1 hour
 FEED_TTL_SECONDS = 60 * 60 * 24 * 7
 
 USE_TIFF = False
+# Point at thumbnail jpgs if you have pregenerated them
+PREGEN_THUMBNAILS = True
 
 SOUTH_TESTS_MIGRATE = False
 ESSAYS_FEED = "http://ndnp-essays.rdc.lctl.gov/feed/"

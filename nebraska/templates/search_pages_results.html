@@ -1,0 +1,225 @@
+{% extends "site_base.html" %} 
+{% load static from staticfiles %}
+{% load custom_filters %}
+
+{% block content %}
+
+{% ifequal paginator.count 0 %}
+
+<p class="search_results_none">
+    <strong>0 Results</strong> were found for the search
+    {% for part in english_search %}
+        <strong>&ldquo;{{ part }}&rdquo;</strong>
+        {% if not forloop.last %}<em>and</em>{% endif %}
+    {% endfor %}
+</p>
+{% else %}
+<div class="search_results_ctrl top fix-float">
+    {% include 'includes/results_ctrl.html' %}
+</div><!-- end class:search_results_ctrl --> 
+
+<div class="search_results_body {{ view_type }}">
+    <div class="results_nav">
+         
+        <form id="results">
+            
+            
+            <div class="row search_results_middle">
+                <div class="col-md-6">
+                
+                    <p class="term">{{ paginator.count }} results 
+                        {% if english_search %}containing{% endif %} 
+                        {% for part in english_search %}
+                        <strong>&ldquo;{{ part }}&rdquo;</strong>
+                        {% if not forloop.last %}<em>and</em>{% endif %}
+                        {% endfor %}
+                        {% if request.REQUEST.date1 and request.REQUEST.date2 %}
+                        &nbsp; for date range {{ request.REQUEST.date1 }} -
+                        {{ request.REQUEST.date2 }}
+                        <a href="#" id="cancel_date_filter"><img src="/media/images/btn_remove.png" title="clear date filter" alt="remove date filter"/><!-- <img src="{# static 'images/btn_remove.png' #}" title="clear date filter" alt="remove date filter"/> --></a>
+                        {% endif %}
+                        {% if request.REQUEST.language %}
+                        {% if request.REQUEST.language == 'cze' %}
+                        &nbsp; for languages Czech
+                        {% elif request.REQUEST.language == 'eng' %}
+                        &nbsp; for languages English
+                        {% else %}
+                        %nbsp for languages {{ request.REQUEST.language }}
+                        {% endif %}
+                        <a href="#" id="cancel_language_filter"><img src="/media/images/btn_remove.png" title="clear language filter" alt="remove language filter"/><!-- <img src="{# static 'images/btn_remove.png' #}" title="clear language filter" alt="remove language filter"/> --></a>
+                        {% endif %}
+                        {% if request.REQUEST.city %}
+                        &nbsp; for cities {{ request.REQUEST.city }}
+                        <a href="#" id="cancel_city_filter"><img src="/media/images/btn_remove.png" title="clear city filter" alt="remove city filter"/><!-- <img src="{# static 'images/btn_remove.png' #}" title="clear city filter" alt="remove city filter"/> --></a>
+                        {% endif %}
+                        {% if request.REQUEST.frequency %}
+                        &nbsp; for frequency {{ request.REQUEST.frequency }}
+                        <a href="#" id="cancel_frequency_filter"><img src="/media/images/btn_remove.png" title="clear frequency filter" alt="remove frequency filter"/><!-- <img src="{# static 'images/btn_remove.png' #}" title="clear frequency filter" alt="remove frequency filter"/> --></a>
+                        {% endif %}
+                    </p>
+                
+                </div>
+                <div class="col-md-3">
+                
+                    <input class="check" name="check_front" id="check_front" value="1" type="checkbox" />
+                    <label class="norm" for="check_front">Front pages only</label>
+                
+                </div>
+                <div class="col-md-3">
+                    <label class="norm" for="sort_select">Sort by:</label> 
+                    <select class="sel" name="sort_select" id="sort_select">
+                        <option value="relevance">Relevance</option>
+                        <option value="title">Title</option>
+                        <option value="date">Date</option>
+                    </select>  <br/>
+                    <label class="norm" for="rpp_select">Results per page:</label> 
+                    <select class="sel" name="rpp_select" id="rpp_select">
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+            </div>
+            
+     
+            <label class="norm" for="filter_select">Filter results by: </label>
+            <select class="sel" name="filter_results" id="filter_select_year">
+                <option value="" disabled selected> year </option>
+                {% for year, count in page.facets.year %}
+                    <option value={{year}}>{{year}} ({{count}})</option>
+                {% endfor %}
+            </select>
+            <select class="sel" name="rpp_select" id="filter_select_language">
+                <option value="" disabled selected> language </option>
+                {% for language, count in page.facets.language %}
+                    {# This is a bit of a hack, but since we only have two languages
+                       just put in code for cze and eng to avoid sending page_titles the full solr name#}
+                    {% if language == 'English' %}
+                      <option value="eng">English ({{count}})</option>
+                    {% elif language == 'Czech' %}
+                      <option value="cze">Czech ({{count}})</option>
+                    {% endif %}
+                    {# <option value={{language}}>{{language}} ({{count}})</option> #}
+                {% endfor %}
+            </select>
+            <select class="sel" name="rpp_select" id="filter_select_city">
+                <option value="" disabled selected> city </option>
+                {% for city, count in page.facets.city %}
+                    <option value="{{city}}">{{city}} ({{count}})</option>
+                {% endfor %}
+            </select>
+            <select class="sel" name="rrp_select" id="filter_select_frequency">
+                <option value="" disabled selected> frequency </option>
+                {% for freq, count in page.facets.frequency %}
+                    <option value="{{freq}}">{{freq}} ({{count}})</option>
+                {% endfor %}
+            </select>
+             
+           
+            
+        </form>
+    </div>
+{% endifequal %}
+{% block search_results_box %}
+
+ <div class="search_results">
+    <div class="row">
+      {% for object in page.object_list %}
+        <div class="col-md-3">
+          {% if object %}
+            <div class="highlite">
+              <a href="{{ object.highlight_url }}">
+                {% if object.jp2_filename %}
+                  <img class="highlight_words" 
+                       src="{{ object.thumb_url }}"
+                       data-script_name="{{script_name}}"
+                       data-id="{{object.url}}"
+                       data-words="{{object.words|join:' '}}" />
+                {% else %}
+                  No Image
+                {% endif %}
+              </a><br />
+              {% with object.issue.title as title %}
+                <a href="{{ object.highlight_url }}">{{title.display_name}} ({{title.place_of_publication}}), {{object.issue|label}}, {{object|label}}</a>
+              {% endwith %}
+              <input name="id" value="{{object.url}}" type="hidden"/>
+              <input name="words" value="{{object.words|join:' '}}" type="hidden"/>
+            </div>
+         {% endif %}
+       </div>
+       {% if forloop.counter|divisibleby:4 and not forloop.last %}
+         </div><div class="row">
+       {% endif %}
+     {% endfor %}
+    </div>
+  </div>
+
+</div><!-- search_results_body -->
+{% endblock %}
+
+{% endblock %}
+
+
+{% block javascript %}
+{{ block.super }}
+    <script src="/media/js/highlight.js"></script>
+<!--     <script src="{# static 'js/highlight.js' #}"></script> -->
+    <script type="text/javascript">
+      jQuery(function($){
+    $("#sort_select option[value='{{sort}}']").attr("selected", true);
+    $("#rpp_select option[value='{{rows}}']").attr("selected", true);
+    if ($.deparam.querystring().sequence == 1){ 
+        $("input#check_front").attr('checked', 'checked');
+    }
+    $("#rpp_select").change(function(){
+        window.location=$.param.querystring(location.href, {'rows': this.value});
+    });
+    $("#sort_select").change(function(){
+        window.location=$.param.querystring(location.href, {'sort': this.value});
+    });
+    $("#check_front").change(function(){
+        var checked = $("#check_front").attr("checked") ? 1 : '';
+        window.location=$.param.querystring(location.href, {'sequence': checked});
+    });
+    $("#filter_select_year").change(function(){
+        if (this.value.indexOf("-") != -1){
+            var year_range = this.value.split("-");
+            window.location=$.param.querystring(location.href, 
+                                            {"date1": year_range[0],
+                                             "date2": year_range[1],
+                                             "dateFilterType":"year"});
+        }
+        else{
+            window.location=$.param.querystring(location.href, 
+                                            {"date1": this.value,
+                                             "date2": this.value,
+                                             "dateFilterType":"year"});
+        }
+    });
+    $("#filter_select_language").change(function(){
+        window.location=$.param.querystring(location.href, {'language': this.value});
+    });
+    $("#filter_select_city").change(function(){
+        window.location=$.param.querystring(location.href, {'city': this.value});
+    });
+    $("#filter_select_frequency").change(function(){
+        window.location=$.param.querystring(location.href, {'frequency': this.value});
+    });
+    $("#cancel_date_filter").on("click", function(e) {
+            window.location=$.param.querystring(location.href, 
+                                            {"date1": "",
+                                             "date2": ""});
+    });
+    $("#cancel_language_filter").on("click", function(e) {
+            window.location=$.param.querystring(location.href, 
+                                            {"language": ""});
+    });
+    $("#cancel_city_filter").on("click", function(e) {
+      window.location=$.param.querystring(location.href, {"city": ""});
+    });
+    $("#cancel_frequency_filter").on("click", function(e) {
+      window.location=$.param.querystring(location.href, {"frequency": ""});
+    });
+});
+
+    </script>
+{% endblock %}

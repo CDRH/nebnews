@@ -14,7 +14,7 @@
 <div class="search_results_body">
     <div class="results_nav">
         <p class="term">
-            {{ titles.count|intcomma }} Nebraska newspaper{% if titles.count > 1 %}s{% endif %}
+            {{ titles.count|intcomma }} newspaper{% if titles.count > 1 %}s{% endif %}
             {% if state %}from <strong>{{ state }}</strong>{% endif %}
             {% if ethnicity %}filtered on <strong>{{ ethnicity }}</strong>{% endif %} 
             {% if language_display %}in <strong>{{ language_display }}</strong>{% endif %}

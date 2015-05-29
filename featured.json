@@ -1,0 +1,75 @@
+[
+  {
+    "full_url": "/lccn/sn99067057/1917-05-08/ed-1/seq-1/",
+    "thumbnail_url": "/lccn/sn99067057/1917-05-08/ed-1/seq-1/thumbnail.jpg",
+    "label": "1",
+    "title": "Ozvêna Západu",
+    "date": "May 8, 1917"
+  },
+  {
+    "full_url": "/lccn/sn99067057/1917-01-17/ed-1/seq-1/",
+    "thumbnail_url": "/lccn/sn99067057/1917-01-17/ed-1/seq-1/thumbnail.jpg",
+    "label": "2",
+    "title": "Ozvêna Západu",
+    "date": "January 17, 1917"
+  },
+  {
+    "full_url": "/lccn/46032385/1901-06-07/ed-1/seq-4/",
+    "thumbnail_url": "/lccn/46032385/1901-06-07/ed-1/seq-4/thumbnail.jpg",
+    "label": "3",
+    "title": "The Commoner",
+    "date": "June 7, 1901"
+  },
+  {
+    "full_url": "/lccn/46032385/1914-01-01/ed-1/seq-17/",
+    "thumbnail_url": "/lccn/46032385/1914-01-01/ed-1/seq-17/thumbnail.jpg",
+    "label": "4",
+    "title": "The Commoner",
+    "date": "January 1, 1914"
+  },
+  {
+    "full_url": "/lccn/46032385/1919-06-01/ed-1/seq-1/",
+    "thumbnail_url": "/lccn/46032385/1919-06-01/ed-1/seq-1/thumbnail.jpg",
+    "label": "5",
+    "title": "The Commoner",
+    "date": "June 1, 1919"
+  },
+  {
+    "full_url": "/lccn/46032385/1902-10-17/ed-1/seq-16/",
+    "thumbnail_url": "/lccn/46032385/1902-10-17/ed-1/seq-16/thumbnail.jpg",
+    "label": "6",
+    "title": "The Commoner",
+    "date": "October 17, 1902"
+  },
+  {
+    "full_url": "/lccn/sn96080312/1927-05-27/ed-1/seq-1/",
+    "thumbnail_url": "/lccn/sn96080312/1927-05-27/ed-1/seq-1/thumbnail.jpg",
+    "label": "7",
+    "title": "The Daily Nebraskan",
+    "date": "May 27, 1927"
+  }
+  ,
+  {
+    "full_url": "/lccn/sn96080292/1914-05-20/ed-1/seq-1/",
+    "thumbnail_url": "/lccn/sn96080292/1914-05-20/ed-1/seq-1/thumbnail.jpg",
+    "label": "8",
+    "title": "Wilberské listy",
+    "date": "May 20, 1914"
+  }
+  ,
+  {
+    "full_url": "/lccn/sn95069354/1899-09-28/ed-1/seq-1/",
+    "thumbnail_url": "/lccn/sn95069354/1899-09-28/ed-1/seq-1/thumbnail.jpg",
+    "label": "9",
+    "title": "Přítel lidu",
+    "date": "September 28, 1899"
+  }
+  ,
+  {
+    "full_url": "/lccn/sn99067057/1916-08-02/ed-1/seq-1/",
+    "thumbnail_url": "/lccn/sn99067057/1916-08-02/ed-1/seq-1/thumbnail.jpg",
+    "label": "10",
+    "title": "Ozvêna západu",
+    "date": "August 02, 1916"
+  }
+]

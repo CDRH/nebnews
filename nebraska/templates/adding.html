@@ -1,0 +1,30 @@
+{% extends 'site_base_about.html' %}
+
+{% load static from staticfiles %}
+
+{% block sharetool_container_left %}{% endblock %}
+
+{% block main_content %}
+  {{ block.super }}
+
+  <div id="content_wrapper" class="about">
+    <h2>Adding Newspapers</h2>
+    <p>If you have funding and would like to see your newspapers added to
+Nebraska Newspapers, please see the <a href="http://www.loc.gov/ndnp/guidelines/">technical guidelines</a>
+provided on the  <a href="http://chroniclingamerica.loc.gov/">Chronicling America</a> website. All newspapers included here
+must follow the guidelines.</p>
+
+    <p>Important considerations include the historical significance and the
+language(s) used in the newspaper – currently only English, French,
+German, Italian, and Spanish languages are allowed. Other considerations
+include the availability, the technical quality, and the completeness of
+the microfilm. All newspapers must have a catalog record included in the
+<a href="http://chroniclingamerica.loc.gov/search/titles/">US Newspaper Directory</a>.</p>
+
+    <p>Before digitizing your newspapers for inclusion on the Nebraska Newspapers
+website, please consult with Katherine Walter (kwalter1 [at] unl.edu).</p>
+
+
+  </div>
+
+{% endblock %}

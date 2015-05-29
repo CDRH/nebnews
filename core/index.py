@@ -156,12 +156,13 @@ class SolrPaginator(Paginator):
                                    start=start,
                                    **params)
         solr_facets = solr_response.facet_counts
-        # sort states by number of hits per state (desc)
-        facets = {'state': sorted(solr_facets.get('facet_fields')['state'].items(),
+        # sort states by number of hits per city (desc)
+        facets = {'language': sorted(solr_facets.get('facet_fields')['language'].items(),
                                   lambda x, y: x - y, lambda k: k[1], True),
                   'year': solr_facets['facet_ranges']['year']['counts'],
-                  'county': sorted(solr_facets.get('facet_fields')['county'].items(),
-                                  lambda x, y: x - y, lambda k: k[1], True)}
+                  'city': sorted(solr_facets.get('facet_fields')['city'].items(),
+                                  lambda x, y: x - y, lambda k: k[1], True),
+                  'frequency': sorted(solr_facets.get('facet_fields')['frequency'].items(),                                  lambda x, y: x - y, lambda k: k[1], True)}
         # sort by year (desc)
         facets['year'] = sorted(solr_facets['facet_ranges']['year']['counts'].items(),
                                 lambda x, y: int(x) - int(y), lambda k: k[0], True)
@@ -309,8 +310,8 @@ class SolrTitlesPaginator(Paginator):
         self.state_facets = sorted(solr_response.facet_counts.get(
                                    'facet_fields')['state'].items(),
                                   lambda x, y: x - y, lambda k: k[1], True)
-        self.county_facets = sorted(solr_response.facet_counts.get(
-                                   'facet_fields')['county'].items(),
+        self.city_facets = sorted(solr_response.facet_counts.get(
+                                   'facet_fields')['city'].items(),
                                   lambda x, y: x - y, lambda k: k[1], True) 
         self.year_facets = year_facets
 
@@ -418,26 +419,31 @@ def page_search(d):
     a corresponding solr query.
     """
     q = ['+type:page']
-
     if d.get('lccn', None):
         q.append(query_join(d.getlist('lccn'), 'lccn'))
 
     if d.get('state', None):
         q.append(query_join(d.getlist('state'), 'state'))
-
+    
+    if d.get('city', None):
+        q.append('+city:"%s"' % d['city'])
+    
+    # dates
     date_filter_type = d.get('dateFilterType', None)
     date_boundaries = _fulltext_range()
     date1 = d.get('date1', None)
     date2 = d.get('date2', None)
-   
     if not date1:
         date1 = date_boundaries[0]
+        d['date1'] = date1
     if not date2:
         date2 = date_boundaries[1]
+        d['date2'] = date2
     if date_filter_type == 'year':
+        # raise Exception(date2)
         date1 = int(date1)
         date2 = int(date2)
-        q.append('+year:[%(year)s TO %(year)s]' % d)
+        q.append('+year:[%(date1)s TO %(date2)s]' % d)
     elif date_filter_type in ('range', 'yearRange'):
         d1 = _solrize_date(str(date1))
         d2 = _solrize_date(str(date2), is_start=False)
@@ -449,8 +455,10 @@ def page_search(d):
     # results page.
     gap = max(1, int(math.ceil((date2 - date1)/10)))
     ocrs = ['ocr_%s' % l for l in settings.SOLR_LANGUAGES]
-
     lang = d.get('language', None)
+    lang_full = models.Language.objects.get(code=str(lang)) if lang else None
+    if lang_full:
+        q.append('+language:%s' % lang_full) 
     ocr_lang = 'ocr_' + lang if lang else 'ocr'
     if d.get('ortext', None):
         q.append('+((' + query_join(solr_escape(d['ortext']).split(' '), "ocr"))
@@ -500,8 +508,10 @@ def page_search(d):
         q.append('+sequence:"%s"' % d['sequence'])
     if d.get('issue_date', None):
         q.append('+month:%d +day:%d' % (int(d['date_month']), int(d['date_day'])))
+    if d.get('frequency', None):
+        q.append('+frequency:%s' % str(d['frequency']))
 
-    facet_params = {'facet': 'true','facet_field': ['state', 'county'],
+    facet_params = {'facet': 'true','facet_field': ['language', 'city', 'frequency'],
                     'facet_range':'year',
                     'f_year_facet_range_start': date1,
                     'f_year_facet_range_end': date2,

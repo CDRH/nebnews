@@ -1,0 +1,456 @@
+body {
+	background: #efefea url(../images/full_backdrop.png) no-repeat center -170px;
+}
+
+.header {
+	padding: 1.5em 0;
+	margin: 0;
+}
+
+.header h1 {
+	padding: .2em;
+	margin: 0;
+}
+
+.navbar {
+	font-family: 'Oranienbaum';
+	background-color: RGBA(255,255,255,.7);
+	border: double #000 3px;
+	border-right: none;
+	border-left: none;
+	margin: 0;
+}
+
+@media (min-width: 768px) {
+
+	h1 .nebraska {
+		margin-left: .9em;
+	}
+	
+	h1 .newspapers {
+		padding-left: 1.6em;
+	}
+	
+	h1.title {
+		font-size: 4em;
+		
+		line-height: .95em;
+		
+		font-weight: 700;
+		font-variant: small-caps;
+	}
+
+
+}
+
+@media (min-width: 992px) {
+	h1.title {
+		font-size: 6em;
+		}
+	}
+
+h1.title {
+	font-family: 'Oranienbaum', serif;
+	text-align: center;
+}
+
+.navbar a {
+	text-decoration: none;
+}
+
+.navbar-right {
+	font-size: .9em;
+}
+
+
+.navbar-second {
+	border: solid 3px #000;
+	border-right: none;
+	border-left: none;
+	border-top: none;
+}
+
+/* To center the search */
+
+@media (min-width: 768px) {
+
+	.navbar-second .container {
+		text-align: center;
+	}
+	
+	.navbar-center {
+		display: inline-block;
+		margin-bottom: -7px;
+	}
+
+}
+
+
+
+/* calendar */
+
+.calendar_wrapper {
+	/*font-family: arial;*/
+}
+
+.calendar_month {
+	display: inline-block;
+	margin: 0 10px 0 0px;
+	background-color: #fff;
+	text-align: center;
+	vertical-align: top;
+}
+
+.calendar_wrapper .title {
+	background-color: #deded8;
+	font-size: 1em;
+}
+
+div.calendar_wrapper .calendar_month td {
+	padding: 4px;
+}
+
+div.calendar_wrapper  .dropdown-toggle {
+	padding: 0;
+	margin: 0;
+}
+
+.calendar_wrapper .table {
+	padding: 0;
+	margin: 0;
+}
+
+
+div.calendar_wrapper table.month td.single {
+	background-color: #e6e8e0;
+	
+}
+div.calendar_wrapper table.month td.multiple {
+    
+    background-color: #c8cac3;
+    
+}
+
+.calendar_wrapper .btn-group a {
+	color: #860e00;
+	text-decoration: none;
+	
+}
+
+.calendar_wrapper td {
+	width: 2.2em;
+}
+
+
+/* Individual Newspapers pages */
+
+
+.title_subnav {
+    margin: 10px 0
+}
+
+.issues_single, .issues_multiple {
+	padding:5px;
+	border: 1px solid #ddd;
+	/*display: inline-block;
+	float: right;*/
+}
+
+.issues_single {
+	background-color: #e6e8df;
+	
+}
+
+.issues_multiple {
+	background-color: #c6c7c1;
+}
+
+
+table.tablesorter tbody tr.odd td {
+    background-color:#fff;
+}
+
+.city_list h3 {
+	background-color: #390b00;
+	padding: 5px;
+	font-size: 1.2em;
+	color: #fff;
+}
+
+/* Footer */
+
+.footer {
+	background-color: #fafaf7;
+	border-top: double 3px #000;
+	padding:  20px 0 50px 0;
+	width: 100%;
+
+}
+
+.footer ul {
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+	float: left;
+}
+
+.footer li {
+	list-style-type: none;
+	display: inline-block;
+	padding: 5px;
+}
+
+.footer .foot_logos {
+	float: right;
+	display: inline;
+	width: 20%;
+}
+
+.foot_logos img {
+	display: inline;
+	float: right;
+	padding: 10px;
+	
+}
+
+/* Advanced Search */
+
+.advanced_search_form {
+	padding: 0 0 40px 0;
+}
+
+.advanced_search_form fieldset {
+	/*border: solid #aaa 1px;*/
+	margin: 0;
+	padding: 10px;
+}
+
+/* Page View */
+
+#item-ctrl > div {
+	margin: 0 !important;
+	padding: 8px 0 2px 180px  !important;
+	font-size: .9em;
+}
+
+
+	#item-ctrl {
+	background: #e6e8dd;
+	border: 1px solid #ddd;
+
+	}
+	#item-ctrl .c-images,
+	#item-ctrl .c-pages,
+	#item-ctrl .c-issues,
+	#item-ctrl .c-view,
+	#item-ctrl .c-download,
+	#item-ctrl .c-clip {
+	padding:0 1em 0 1em;
+	height:17px;
+
+	}
+	#item-ctrl .c-pages {border-right: 2px solid #c6c6c0;}
+	#item-ctrl .c-view {border-left:2px solid #c6c6c0;}
+	#item-ctrl .c-download,
+
+	#item-ctrl .c-pages a.all,
+	#item-ctrl .c-issues a.all {
+	margin-left:1em;
+	}
+	#item-ctrl .c-pages strong,
+	#item-ctrl .c-issues strong {
+	margin-left: .5em;
+	margin-right: .5em;
+	}
+
+	#item-ctrl .c-view span {
+	color: #c6c6c0;
+	}
+
+/* Pages list/Search Results */
+
+.search_results {
+	margin: 10px 0 30px 0;
+}
+
+.search_results .row {
+	margin-bottom: 10px;
+}
+
+.search_results img {
+	max-width: 100%;
+}
+
+
+.search_results .highlite {
+	font-size: .9em;
+	line-height: 1.1em !important;
+}
+
+/* Search Results */
+
+.search_results_ctrl {
+	margin:  10px 0 10px 0;
+	display: block;
+}
+
+.search_results_ctrl a, span.off {
+	border: 1px solid #ccc;
+	background-color: #feffff;
+	padding: 4px 7px;
+	display: inline-block;
+	/*margin-right: -5px;*/
+}
+
+.pagination {
+	margin: 0;
+}
+
+.search_results_ctrl .row {
+	font-size: .9em;
+
+}
+
+a.pag-selected, span.off {
+	background-color: #860e00;
+	color: #fff;
+}
+
+.search_results_middle {
+	border: 1px solid #ddd;
+	border-right: none;
+	border-left: none;
+	margin: 10px 0 10px 0;
+	padding: 5px 0;
+}
+
+.search_results_none {
+	text-align: center;
+	padding: 50px 0 0 50px;
+}
+
+.front_pages_nav {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+
+
+/* Home Page Featured Content */
+
+.featured_content {
+	margin: 0;
+	padding: 0;
+}
+
+.featured_content li {
+	/*border: solid 2px #000;*/
+	list-style-type: none;
+	width: 50%;
+	float: left;
+		-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.featured_content img {
+	max-width: 100%;
+	margin: 0;
+	padding: 0;
+	border:  solid 1px #000;
+}
+
+.featured_content li a {
+	margin: 10px 10px 10px 10px;
+	display: inline-block;
+	max-width: 100%;
+	font-size: .9em;
+	background-color: #fff;
+	padding: .5em;
+	text-decoration: none;
+	line-height: 1.2em;
+}
+
+.featured_content li a span {
+	padding: .1em .5em;
+	display: block;
+	text-align: center;
+	
+}
+
+.featured_content li:nth-child(2n+1) {
+    clear: left;
+}
+
+
+/* Help */
+
+.help_images {
+	margin: 10px auto 20px auto;
+
+	display: block;
+	border:  solid 8px #fff;
+}
+
+
+
+ /*LOC Styles*/ 
+
+@media (max-width: 979px) {
+	body {
+	    padding-top: 0px;
+	}
+	.navbar-fixed-top {
+	    margin-bottom: 0px;
+	}
+    }
+    .breadcrumb {
+        margin: 0 0 5px;
+    }
+    #myCarousel {
+        margin-top: 10px;
+    }
+
+    ul.newspaper_pages li.span4 {
+	height: 450px;
+    }
+    @media (min-width: 1200px) {
+	ul.newspaper_pages li.span4 {
+	    height: 575px;
+	}
+    }
+    @media (max-width: 979px) and (min-width: 768px) {
+	ul.newspaper_pages li.span4 {
+	    height: 350px;
+	}
+    }
+    @media (max-width: 767px) {
+	ul.newspaper_pages li.span4 {
+	    height: auto;
+	}
+    }
+
+    .highlight_words div {
+	margin-top: -3px;
+	padding-top: 3px;
+	margin-bottom: 3px;
+	padding-bottom: 3px;
+	margin-left: -1px;
+	padding-left: 1px;
+	margin-right: 1px;
+	padding-right: 1px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: black;
+	background:transparent;
+	background: rgba(255, 0, 0, 0.4);
+    }
+    
+    
+    
+    
+    
+    
+    
+
+

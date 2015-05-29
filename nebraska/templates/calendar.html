@@ -1,0 +1,39 @@
+{% extends "calendar_base.html" %}
+
+{% block lc_metadata %}
+{% include "includes/lc_metadata.html" %}
+{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+<script type="text/javascript">
+jQuery(function($){
+    $("#id_year").change(function(){
+        window.location = '{% url 'chronam_calendar' %}' + this.value;        
+        });
+});
+</script>
+{% endblock %}
+
+{% block extra_nav %}
+<div class="row">
+    <div class="col-md-4">
+        <form>
+            <label class="bold" for="year_select">Issues for:</label>&nbsp; {{select_year_form.year}}
+        </form></div>
+    <div class="col-md-4">
+        <p class="issues_single">Single edition</p></div>
+    <div class="col-md-4">
+        <p class="issues_multiple">Multiple editions</p> </div>
+</div>
+
+
+{% endblock %}
+
+{% block newspaper_content %}
+<div id="col2_right" class='row'> 
+    {{year_view|safe}}
+</div><!-- end id:col2_right --> 
+<br/><br/>
+</div><!-- /container, I don't know why -->
+{% endblock %}
