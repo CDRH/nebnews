@@ -45,10 +45,10 @@ This is when you find out if the batch is organized correctly.  This is also whe
 
 The first of the above commands starts a python virtual environment.  The second loads the settings from the settings.py file in the root of the chronam directory, and the final command starts the load process for your new batch.  It may take several hours to finish loading.  If the process fails, check the [troubleshooting](./troubleshooting.md) document for help.  You can monitor the status of your batch by finding its link at /batches/ in the Nebraska Newspaper website.
 
-Is This For a New Paper or Location?
+Updating the Location
 ---------------
 
-We did some hardcoding of locations, since our content is not predicted to be changing very much.  If you are adding yet another Omaha Daily Bee, then you're probably good to go.  If you're adding the Unique Town Herald then you will likely need to add a location to several places on the site.  See [adding a location](location.md) for more information.
+We did some hardcoding of locations, since our content is not predicted to be changing very much.  Even if you don't have a unique location, you'll need to add your new paper to a few places on the site.  See [adding a location](location.md) for more information.
 
 Does this Paper Have an Essay?
 --------------
