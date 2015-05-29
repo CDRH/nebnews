@@ -1,0 +1,47 @@
+{% extends "newspaper.html" %}
+
+{% block lc_metadata %}
+{% include "includes/lc_metadata.html" %}
+{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+<script type="text/javascript">
+jQuery(function($){
+    $("#id_year").change(function(){
+        window.location = '{% url 'chronam_issues' title.lccn %}' + this.value;        
+        });
+    $("td.multiple").find("ul").css("display", "none");
+    
+    $("td.multiple").hover(
+    function () {
+    $(this).find("ul").slideToggle();
+    },
+    function () {
+    $(this).find("ul").slideToggle();
+    });
+});
+</script>
+{% endblock %}
+
+{% block extra_nav %}
+
+<div class="row">
+    <div class="col-md-4">
+        <form>
+            <label class="bold" for="year_select">Issues for:</label>&nbsp; {{select_year_form.year}}
+        </form></div>
+    <div class="col-md-4">
+        <p class="issues_single">Single edition</p></div>
+    <div class="col-md-4">
+        <p class="issues_multiple">Multiple editions</p> </div>
+</div>
+
+<!-- end id:col2_left --> 
+{% endblock %}
+
+{% block newspaper_content %}
+<div class='row'> 
+    {{year_view|safe}}
+</div><!-- end id:col2_right --> 
+{% endblock %}

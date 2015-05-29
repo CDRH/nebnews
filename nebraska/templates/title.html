@@ -1,0 +1,247 @@
+{% extends "newspaper.html" %}
+{% load static from staticfiles %}
+{% load custom_filters %}
+
+{% block lc_metadata %}
+{% with title.display_name as title_metadata %}
+{% include "includes/lc_metadata.html" %}
+{% endwith %}
+{% endblock %}
+
+{% block extra_link_types %}
+<link rel="alternate" href="{% url 'chronam_title_dot_json' title.lccn %}" />
+{% endblock %}
+
+{% block newspaper_content %}
+ <div class="row">
+    <div class="col-md-6">
+        <div class="frontpage span2">
+            <h3>{{title.display_name}}&nbsp;{{issue_date|date:"F j, Y"}}, Image {{title.first_issue.first_page.sequence}}</h3>
+            
+            {% if title.first_issue.first_page_with_image.jp2_filename and title.first_issue.first_page_with_image.sequence %}
+            <a href="{% url 'chronam_page' title.lccn title.first_issue.date_issued title.first_issue.edition title.first_issue.first_page_with_image.sequence %}">
+                <img class="thumbnail" src="{% url 'chronam_page_thumbnail' title.lccn title.first_issue.date_issued title.first_issue.edition title.first_issue.first_page_with_image.sequence %}" alt="" />
+            </a>
+            {% else %}
+            Missing Page: {{explanation}}
+            {% endif %}
+        </div>
+
+ <dl class="alt">
+            <dt>Title: </dt>
+            <dd>
+                {{title.display_name}} : ({{title.place_of_publication}}) {{title.start_year}}-{{title.end_year}}
+                {% if title.essay %}
+                <br/>
+                <img src="/media/img-std/i_arrow_o.gif" width="9" height="9" alt="" />
+                <a href="{% url 'chronam_essay' title.essay.id %}">More About this Newspaper</a>
+<!--
+                <img src="{# static 'img-std/i_arrow_o.gif' #}" width="9" height="9" alt="" />
+                <a href="{# url 'chronam_essay' title.essay.id #}">More About this Newspaper</a>
+-->
+                {% endif %}
+            </dd>
+
+  {% if title.alt_titles.all %}
+            <dt>Alternative Titles:</dt>
+            <dd>
+                <ul class="bullet_blue">
+                    {% for alt in title.alt_titles.all %}
+                    <li>
+                        {{ alt.name }}
+                        {% if alt.date %}
+                        {{ alt.date }}
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </dd>
+            {% endif %}
+        
+                        
+            {% if title.place_of_publication %}
+            <dt>Place of publication:</dt>
+                <dd>{{title.place_of_publication}}</dd>
+            {% endif %}
+
+            {% if title.places %}
+            <dt>Geographic coverage:</dt>
+            <dd>
+                <ul class="bullet_blue">
+                    {% for place in title.places.all %}
+                    <li>
+                        {{ place.city }}, 
+                        {% ifnotequal place.county None %}
+                        {{ place.county }}, 
+                        {% endifnotequal %}
+                        {{ place.state }}
+                        </li>
+                    <li>View more titles from this: 
+                        <a href="{% url 'chronam_city' place.state|pack_url place.county|pack_url place.city|pack_url %}">City</a>
+                        {% ifnotequal place.county None %} | 
+                        <a href="{% url 'chronam_county' place.state|pack_url place.county|pack_url %}">County</a><!--,-->
+                        {% endifnotequal %}
+                        <!--<a href="{% url 'chronam_state' place.state|pack_url %}">State</a>-->
+                    </li>
+                    {% endfor %}
+                </ul>
+            </dd>
+            {% endif %}
+        
+            {% if title.publisher %}
+            <dt>Publisher:</dt>
+            <dd>{{title.publisher}}</dd>
+            {% endif %}
+        
+            {% if title.start_year or title_end_year %}
+            <dt>Dates of publication:</dt>
+            <dd>{{title.start_year|default:"?"}}-{{title.end_year|default:"?"}}</dd>
+            {% endif %}
+
+ {% if title.publication_dates.all %}
+            <dt>Description:</dt>
+            <dd>
+                <ul class="bullet_blue">
+                    {% for pd in title.publication_dates.all %}
+                    <li>
+                    {{ pd.text }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </dd>
+            {% endif %}
+        
+            {% if title.frequency %}
+            <dt>Frequency:</dt>
+            <dd>{{ title.frequency }} 
+                {% if title.frequency_date %}
+                {{ title.frequency_date }}
+                {% endif %}
+            </dd>
+            {% endif %}
+        
+            {% if title.languages.all %}
+            <dt>Language:</dt>
+            <dd>
+            <ul class="bullet_blue">
+                {% for lang in title.languages.all %}
+                <li>
+                    <dd>{{lang.name}}</dd>
+                </li>
+                {% endfor %}
+            </ul>
+            </dd>
+            {% endif %}
+
+ {% if title.subjects.all %}
+            <dt>Subjects:</dt>
+            <dd>
+                <ul class="bullet_blue">
+                    {% for subject in title.subjects.all %}
+                    <li>{{subject.heading}}</li>
+                    {% endfor %}
+                </ul>
+            </dd>
+            {% endif %}
+        
+            {% if title.notes.all %}
+            <dt>Notes:</dt>
+            <dd>
+                <ul class="bullet_blue">
+                    {% for note in notes %}
+                    <li>{{ note|safe }}</li>
+                    {% endfor %}
+                </ul>
+            </dd>
+            {% endif %}
+            
+            <dt>LCCN:</dt>
+            <dd>{{title.lccn_orig}}</dd>
+        
+            {% if title.oclc %}
+            <dt>OCLC:</dt>
+            <dd>{{title.oclc}} </dd>
+            {% endif %}                
+        
+            {% if title.issn %}
+            <dt>ISSN:</dt>
+            <dd>{{title.issn}}</dd>
+            {% endif %}                
+            
+             {% if preceeding_titles %}
+            <dt>Preceding Titles:</dt>
+            <dd>
+                <ul class="bullet_blue">
+                {% for t in preceeding_titles %}
+                    <li><a href="{% url 'chronam_title' t.lccn %}">{{t}}</a></li>
+                {% endfor %}
+                </ul>
+            </dd>
+            {% endif %}
+        
+            {% if succeeding_titles %}
+            <dt>Succeeding Titles:</dt>
+            <dd>
+                <ul class="bullet_blue">
+                    {% for t in succeeding_titles %}
+                    <li><a href="{% url 'chronam_title' t.lccn %}">{{t}}</a></li>
+                    {% endfor %}
+                </ul>
+            </dd>
+            {% endif %}
+        
+            {% if related_titles %}
+            <dt>Related Titles:</dt>
+            <dd>
+                <ul class="bullet_blue">
+                    {% for t in related_titles %}
+                    <li><a href="{% url 'chronam_title' t.lccn %}">{{t}}</a></li>
+                    {% endfor %}
+                </ul>
+            </dd>
+            {% endif %}
+
+ {% if title.urls.all %}
+            <dt>Related Links:</dt>
+            <dd>
+                <ul class="bullet_blue">
+                    {% for u in title.urls.all %}
+                    <li><a href="{{u.value}}">{{u.value}}</a></li>
+                    {% endfor %}
+                </ul>
+            </dd>
+            {% endif %}
+            <dt>MARC</dt>
+            <dd><a id="page_nav_marc" href="{% url 'chronam_title_marc' title.lccn %}">Record</a></dd>
+            
+        </dl>
+
+ </div><!-- end leftcol -->
+
+    
+
+    <div class="col-md-6">
+        {% if title.has_issues %}
+        
+           
+            <div class="info span3">
+              
+                        </div>
+       
+        {% endif %}
+
+
+ {% if first_essay %}
+        
+            <div class="span6">
+            <h4>{{first_essay.title}}</h4>
+            <p>{{first_essay.html|safe}}</p>
+            <p><em>Provided by: <a href="{% url 'chronam_awardee' first_essay.creator.org_code %}">{{ first_essay.creator }}</a></em></p>
+            </div>
+        <!-- end class:more -->
+        {% endif %}
+ </div><!-- end rightcol -->
+</div>
+
+{% endblock %}
+

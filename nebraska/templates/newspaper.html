@@ -1,0 +1,98 @@
+{% extends "site_base.html" %}
+
+{% load static from staticfiles %}
+{% block lc_metadata %}
+{% with title.display_name as title_metadata %}
+{% include "includes/lc_metadata.html" %}
+{% endwith %}
+{% endblock lc_metadata %}
+
+{% block extrahead %}
+<link rel="primaryTopic" href="{{ title.abstract_url }}" />
+<link rel="resourcemap" type="application/rdf+xml" href="{% url 'chronam_title_dot_rdf' title.lccn %}" title="ORE Resource Map" />
+<link rel="alternate" type="application/marc+xml" href="{% url 'chronam_title_marcxml' title.lccn %}" title="MARCXML Record for {{ title.display_name }}" />
+<link rel="alternate" type="application/atom+xml" href="{% url 'chronam_title_atom' title.lccn %}" title="Update Feed for {{ title.display_name }}" />
+
+{% endblock extrahead %}
+
+{% block download_links %}
+{
+    link: '{% url 'chronam_title_marcxml' title.lccn %}',
+    label: 'application/marc+xml',
+    meta: 'MARCXML Record for {{ title.display_name }}',
+},
+{
+    link: '{% url 'chronam_title_atom' title.lccn %}',
+    label: 'application/atom+xml',
+    meta: 'Update Feed for {{ title.display_name }}',
+},
+{% endblock %}
+                      
+{% block page_head %}
+
+<h2>{{ page_title }}</h2>
+<!-- Commented out because info is a repeat of what is pulled above -->
+<!--<h3>{{title.place_of_publication}} ({{title.start_year}}-{{title.end_year}})</h3>-->
+
+{% endblock page_head %}
+
+{% block subcontent %}
+
+{% block page_nav %} 
+
+
+
+
+
+
+
+
+
+
+        <ul class="nav nav-pills">
+            <li role="presentation"><a id="page_nav_title" href="{% url 'chronam_title' title.lccn %}"> {{title.display_name}}  Main Page</a></li>
+            {% if title.has_issues %}<li role="presentation"><a id="page_nav_issues" href="{% url 'chronam_issues' title.lccn %}">Browse Issues by Date</a></li>{% endif %}
+            
+        </ul>
+        
+        <div class="search_results_ctrl">
+	        <span class="nav">
+	        <a href="{% url 'chronam_page' title.lccn title.first_issue.date_issued title.first_issue.edition title.first_issue.first_page.sequence %}" class="ar-back">First Issue</a> 
+	        <a href="{% url 'chronam_page' title.lccn title.last_issue.date_issued title.last_issue.edition title.last_issue.first_page.sequence %}" shape="rect">Last Issue</a>
+	        <a href="{% url 'chronam_issues_first_pages' title.lccn %}">All front pages</a>
+	        </span>
+	     </div>
+
+<!--
+
+        <div class="btn-group title_subnav" role="group" aria-label="...">
+    <a href="{% url 'chronam_page' title.lccn title.first_issue.date_issued title.first_issue.edition title.first_issue.first_page.sequence %}" class="btn btn-primary" >First Issue</a>
+    <a href="{% url 'chronam_page' title.lccn title.last_issue.date_issued title.last_issue.edition title.last_issue.first_page.sequence %}" class="btn btn-primary">Last Issue</a>
+    <a href="{% url 'chronam_issues_first_pages' title.lccn %}" class="btn btn-primary">All front pages</a>
+</div>
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock page_nav %}
+
+<div id="std_box"> 
+    {% block extra_nav %}
+    {% endblock %}
+    
+    {% block newspaper_content %}
+    {% endblock newspaper_content %}
+
+    <div class="clear"><!-- --></div> 
+</div><!-- end id:std_box --> 
+<br/><br/>
+{% endblock subcontent %}
