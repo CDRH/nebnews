@@ -6,8 +6,7 @@ adaptation of the Library of Congress's
 [Chronicling America](http://chroniclingamerica.loc.gov) application.
 This project makes historic Nebraskan newspapers available to be
 viewed, browsed, and searched online.  For information about the 
-contributors to the Nebraska Newspapers, please visit the (TODO put
-in link with actual path when site is live).  For more information about the
+contributors to the Nebraska Newspapers, please visit the [Nebraska Newspapers About Page](http://nebnewspapers.unl.edu/about/).  For more information about the
 purpose and awardees of the Chronicling America project, please refer to the
 [Chronicling America](http://chroniclingamerica.loc.gov/about/) website.
 
