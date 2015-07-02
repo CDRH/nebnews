@@ -1,6 +1,19 @@
 Troubleshooting
 ===============
 
+Server Responding with 503 / Server Errors
+--------------
+
+CHECK JETTY.  Is it running?  Can you curl localhost:8983/solr?  Try restarting jetty first off.
+
+BLAME SELINUX.  If you restarted the server, there's a good chance that SELinux is trying to reinstate its tyrannical rule over serverland.  `setenforce 0` will temporarily get you back into a beautiful permissive environment
+
+APACHE LOGS.  You can get more detailed  information about the errors and traffic in /var/log/httpd.  When did requests start failing?
+
+MYSQL.  Is it running?  Can django see it?
+
+PERMISSIONS.  It's possible that there is some permission issue going on, but hopefully unlikely.  Check that apache / mod_wsgi are operating okay and that 
+
 Permission Denied When Uploading to Server
 --------------
 
