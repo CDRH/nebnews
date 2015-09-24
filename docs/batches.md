@@ -18,6 +18,14 @@ The lccns for the following batches were modified:
 - batch_nbu_bravo_ver01 (changed sn94080311 to sn96080312)
 - batch_nbu_eisley_ver01  (see below)
 
+Other Changes
+----------
+
+- @pm manually added as an awardee in order to process plattsmouth batches
+- Titles altered for capitalization
+- Ozvěna západu title corrected (symbol ě instead of é)
+- Date correction for Daily Nebraskan issue that claims it was made in the 18th century
+
 nbu_eisley
 -----------
 
