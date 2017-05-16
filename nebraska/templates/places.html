@@ -406,7 +406,7 @@
       map.addLayer(stamenLayer);
 
       // the historical overlay
-      var overlay = new L.TileLayer.WMS("http://cors1601.unl.edu:8080/geoserver/gwc/service/wms", {
+      var overlay = new L.TileLayer.WMS("http://cors1601.unl.edu/geoserver/gwc/service/wms", {
                 layers: 'states:Nebraska_wma',
                 format: 'image/png',
                 transparent: true
