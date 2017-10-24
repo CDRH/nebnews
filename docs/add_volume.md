@@ -13,7 +13,7 @@ Now create a new logical volume inside of that group.  The naming conventions we
     
 Make a new filesystem.  Your new volume is probably in `/dev/vg_batches/` but the path may have changed if you found that your volume group was not `vg_batches` as advertised above.
 
-    mkfs.ext3 /dev/vg_batches/nbu_name
+    mkfs.ext4 /dev/vg_batches/nbu_name
     
 Mount your filesystem.
 
