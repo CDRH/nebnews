@@ -9,6 +9,13 @@ Determine your volume group.  It should be `vg_batches` but there is no harm in 
 
 Now create a new logical volume inside of that group.  The naming conventions were based roughly on the batch names in the network drives, but if in doubt just use nbu as the prefix, since all of our batches have that awardee code.  If this is a particularly large batch, 200G may not be big enough.  Try to determine how big your batch is before you create the volume, if possible.
 
+To determine the size of your batch with OSX and linux, respectively (without tiffs):
+
+    du -sh -I "*.tif" batch_name
+    du -sh --exclude="*.tif" batch_name
+    
+Create a logical volume on the newspaper server:
+
     lvcreate -L 200G -n nbu_name vg_batches
     
 Make a new filesystem.  Your new volume is probably in `/dev/vg_batches/` but the path may have changed if you found that your volume group was not `vg_batches` as advertised above.
