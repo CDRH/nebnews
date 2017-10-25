@@ -49,7 +49,10 @@ Press `i` to type.
     /dev/vg_batches/nbu_abbott      /batches/nbu_abbott     ext3    defaults        1 2
 ```
 
-Double check that you didn't make any typos.  Triple check.  Great, now save and exit with `:wq` and press enter.
+Double check that you didn't make any typos.  Triple check.  Great, now save and exit with `:wq` and press enter.  Run the following command and double check the line you just added:
+
+    mount -f
+
 If you want to find out if you have made a typo now rather than wondering what is going wrong in 8 months when the server goes down, reboot it right away.  Ask Jason or one of the other CORS sysadmins before doing this!  You may need their immediate help if there is something wrong with the fstab file, but at the very least there might not be a lot of good will if you just restart their server without asking first.
 
     shutdown -r now
