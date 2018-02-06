@@ -11,8 +11,7 @@ If you do not see a volume for your batch, then follow the instructions for [add
 
 After you've added the volume, go you can make some directories.
 
-    mkdir /batches/prefix_batchname/batch_prefix_name_ver01
-    mkdir /batches/prefix_batchname/batch_prefix_name_ver01/data
+    mkdir -p /batches/prefix_batchname/batch_prefix_name_ver01/data
 
 
 Upload the Batch to the Server

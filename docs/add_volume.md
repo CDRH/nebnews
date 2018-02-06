@@ -9,11 +9,18 @@ Determine your volume group.  It should be `vg_batches` but there is no harm in 
 
 Now create a new logical volume inside of that group.  The naming conventions were based roughly on the batch names in the network drives, but if in doubt just use nbu as the prefix, since all of our batches have that awardee code.  If this is a particularly large batch, 200G may not be big enough.  Try to determine how big your batch is before you create the volume, if possible.
 
+To determine the size of your batch with OSX and linux, respectively (without tiffs):
+
+    du -sh -I "*.tif" batch_name
+    du -sh --exclude="*.tif" batch_name
+    
+Create a logical volume on the newspaper server:
+
     lvcreate -L 200G -n nbu_name vg_batches
     
 Make a new filesystem.  Your new volume is probably in `/dev/vg_batches/` but the path may have changed if you found that your volume group was not `vg_batches` as advertised above.
 
-    mkfs.ext3 /dev/vg_batches/nbu_name
+    mkfs.ext4 /dev/vg_batches/nbu_name
     
 Mount your filesystem.
 
@@ -42,7 +49,10 @@ Press `i` to type.
     /dev/vg_batches/nbu_abbott      /batches/nbu_abbott     ext3    defaults        1 2
 ```
 
-Double check that you didn't make any typos.  Triple check.  Great, now save and exit with `:wq` and press enter.
+Double check that you didn't make any typos.  Triple check.  Great, now save and exit with `:wq` and press enter.  Run the following command and double check the line you just added:
+
+    mount -f
+
 If you want to find out if you have made a typo now rather than wondering what is going wrong in 8 months when the server goes down, reboot it right away.  Ask Jason or one of the other CORS sysadmins before doing this!  You may need their immediate help if there is something wrong with the fstab file, but at the very least there might not be a lot of good will if you just restart their server without asking first.
 
     shutdown -r now
