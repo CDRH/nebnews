@@ -25,7 +25,7 @@ if [ $# == 1 ]; then
   if [ -d "$1" ]; then
     dir_path=$1
     # strip the trailing slash before running find
-    find "${dir_path%/}" -type f -name "*.jp2" | parallel --jobs 200% convert
+    find "${dir_path%/}" -type f -name "*.jp2" | parallel --jobs 20% convert
 
   else
     echo "Directory $1 does not exist"
