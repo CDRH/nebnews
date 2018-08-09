@@ -514,7 +514,7 @@ def page_search(d):
     facet_params = {'facet': 'true','facet_field': ['language', 'city', 'frequency'],
                     'facet_range':'year',
                     'f_year_facet_range_start': date1,
-                    'f_year_facet_range_end': date2,
+                    'f_year_facet_range_end': date2+1,
                     'f_year_facet_range_gap': gap, 'facet_mincount': 1}
     return ' '.join(q), facet_params
 
